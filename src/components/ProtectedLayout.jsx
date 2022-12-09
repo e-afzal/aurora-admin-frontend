@@ -6,7 +6,7 @@ const ProtectedLayout = ({ children }) => {
   const { isLoading, error, isAuthenticated } = useAuth0();
   return (
     <>
-      {error || !isAuthenticated && !isLoading && <Login />}
+      {error || !isAuthenticated && !isLoading && <p>Authentication error..</p>}
       {!error && isLoading && <p>Loading...</p>}
       {!error && !isLoading && isAuthenticated && (
         <>
