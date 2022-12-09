@@ -1,0 +1,615 @@
+body .dashboard-grid .dashboard-container {
+  border-left: 1px solid #282828;
+  padding-bottom: 3.5rem;
+}
+body .dashboard-grid .dashboard-container .divider {
+  border-bottom: 1px solid #282828;
+  width: 100%;
+  height: 3.5rem;
+  margin-bottom: 3rem;
+}
+body .dashboard-grid .dashboard-container section.dashboard-main {
+  padding-inline: clamp(1.5rem, 5vw, 7rem);
+  margin-bottom: 5rem;
+}
+body .dashboard-grid .dashboard-container section.dashboard-main .area-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title {
+  display: flex;
+  align-items: center;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  img {
+  height: 40px;
+  rotate: 180deg;
+  background-color: #232323;
+  border-radius: 3px;
+  padding-block: 10px;
+  padding-inline: 10px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3 {
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.45px;
+  margin-left: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: #e6e6e6;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3
+  span.payment-tablet,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3
+  span.fulfillment-tablet {
+  margin-left: 10px;
+  font-size: 13px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 2rem;
+  border-radius: 10rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3
+  span.payment-tablet {
+  background-color: #34b27b;
+  color: #fff;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3
+  span.fulfillment-tablet {
+  background-color: #f4f900;
+  color: #000;
+}
+body .dashboard-grid .dashboard-container section.dashboard-main .area-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.spent
+  h4,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.placed
+  h4,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.average
+  h4 {
+  font-size: 2rem;
+  color: #e6e6e6;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.spent
+  p,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.placed
+  p,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .order-facts-grid
+  section.average
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last {
+  margin-top: 5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  h4 {
+  color: #e6e6e6;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid {
+  width: 80%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-details
+  .status
+  a {
+  color: #578edb;
+  text-decoration: underline;
+  font-size: 1.6rem;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-details
+  .status
+  span {
+  margin-left: 10px;
+  font-size: 13px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 2rem;
+  border-radius: 10rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-details
+  .status
+  span.payment-status {
+  background-color: #34b27b;
+  color: #fff;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-details
+  .status
+  span.fulfillment-status {
+  background-color: #f4f900;
+  color: #000;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-details
+  p {
+  color: #999999;
+  margin-top: 0.7rem;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .last
+  .order-grid
+  .order-amount
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  margin-top: 0;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders {
+  margin-top: 5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  h4 {
+  color: #e6e6e6;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid {
+  width: 80%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 3.6rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-details
+  .status
+  a {
+  color: #578edb;
+  text-decoration: underline;
+  font-size: 1.6rem;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-details
+  .status
+  span {
+  margin-left: 10px;
+  font-size: 13px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 2rem;
+  border-radius: 10rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-details
+  .status
+  span.payment-status {
+  background-color: #34b27b;
+  color: #fff;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-details
+  .status
+  span.fulfillment-status {
+  background-color: #f4f900;
+  color: #000;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-details
+  p {
+  color: #999999;
+  margin-top: 0.7rem;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid
+  .order-amount
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  margin-top: 0;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid:nth-child(2) {
+  margin-top: 1.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.order-details
+  .total-orders
+  .order-grid:nth-child(3)
+  .order-details
+  .status
+  span.fulfillment-status {
+  background-color: #34b27b;
+  color: #fff;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details {
+  margin-left: auto;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card {
+  background-color: #232323;
+  width: max-content;
+  padding: 3.5rem 5.5rem 3.5rem 3rem;
+  border-radius: 1rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  h4 {
+  color: #e6e6e6;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+  font-size: 2rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  h5 {
+  color: #fff;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-name {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-name
+  p {
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-email {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-email
+  p {
+  margin-top: 3px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address
+  p {
+  margin-top: 0;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address
+  p:nth-child(2) {
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .billing-address {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .billing-address
+  p {
+  margin-top: 5px;
+}

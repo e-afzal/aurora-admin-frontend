@@ -1,0 +1,39 @@
+body #admin-login-container {
+  background-color: #fdc1ba;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body #admin-login-container .admin-login-card {
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  width: 25%;
+  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.12);
+  padding: 3rem 2rem;
+  height: 250px;
+}
+body #admin-login-container .admin-login-card .admin-login-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4.5rem;
+}
+body
+  #admin-login-container
+  .admin-login-card
+  .admin-login-image-container
+  img.admin-login-image {
+  width: 50%;
+}
+body #admin-login-container .admin-login-card p.admin-login-message {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 1.6rem;
+}
+body #admin-login-container .admin-login-card button.admin-login-btn {
+  margin-inline: auto;
+  display: block;
+  text-transform: uppercase;
+  width: 35%;
+}

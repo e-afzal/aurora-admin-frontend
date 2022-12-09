@@ -1,0 +1,584 @@
+body .dashboard-grid .collectionsEdit-dashboard-container {
+  border-left: 1px solid #282828;
+  padding-bottom: 3.5rem;
+}
+body .dashboard-grid .collectionsEdit-dashboard-container .divider {
+  border-bottom: 1px solid #282828;
+  width: 100%;
+  height: 3.5rem;
+  margin-bottom: 3rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main {
+  padding-inline: clamp(1.5rem, 5vw, 7rem);
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title {
+  display: flex;
+  align-items: center;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  img {
+  cursor: pointer;
+  height: 40px;
+  rotate: 180deg;
+  background-color: #232323;
+  border-radius: 3px;
+  padding-block: 10px;
+  padding-inline: 10px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3 {
+  margin-left: 15px;
+  text-align: center;
+  color: #e6e6e6;
+  font-family: "Avenir-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-header
+  button {
+  display: inline-block;
+  width: min-content;
+  padding: 12px 20px;
+  background-color: #34b27b;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 13px;
+  letter-spacing: 1.2px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 5rem;
+  column-gap: 5rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-status,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-image,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list {
+  border: 1px solid #282828;
+  border-radius: 5px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  h4 {
+  font-family: "Avenir-Medium", sans-serif;
+  text-transform: capitalize;
+  background-color: #232323;
+  padding: 2rem;
+  color: #e6e6e6;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-wrapper {
+  padding-inline: 2rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-wrapper
+  .semantic.ui.dropdown.selection {
+  margin-top: 1rem;
+  background-color: transparent;
+  border-color: #a6a6a6;
+  display: block;
+  font-family: "Brandon_Grotesque-Regular";
+  font-size: 16px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-wrapper
+  .semantic.ui.dropdown.selection
+  i {
+  color: #a6a6a6;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-wrapper
+  .semantic.ui.dropdown.selection
+  .text {
+  color: #a6a6a6;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-wrapper
+  .semantic.ui.dropdown.selection
+  .menu
+  .item {
+  color: #000;
+  font-family: "Brandon_Grotesque-Regular";
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-control {
+  margin-top: 3.5rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-control
+  label {
+  color: #a6a6a6;
+  display: block;
+  font-family: "Brandon_Grotesque-Medium", serif;
+  text-transform: capitalize;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-control
+  input,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-control
+  textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #282828;
+  color: #fff;
+  font-family: "Brandon_Grotesque-Regular", serif;
+  font-size: 16px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content {
+  padding-bottom: 2rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content
+  input[type="number"] {
+  -moz-appearance: textfield;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content
+  input[type="number"]::placeholder {
+  color: #a6a6a6;
+  letter-spacing: 0.2px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content
+  input::-webkit-outer-spin-button,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-content
+  textarea {
+  resize: vertical;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options {
+  grid-column: 2/3;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status {
+  border-radius: 5px;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  h4 {
+  display: block;
+  text-transform: capitalize;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  .form-wrapper {
+  padding-block: 2rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  .form-wrapper
+  select {
+  font-family: "Chronicle_Display-Light", sans-serif;
+  padding: 15px 12px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  width: 80%;
+  margin-bottom: 1.5rem;
+  /* Replace Default Select Styling (arrow) */
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+  background-position: right 10px top 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  padding-right: 30px;
+  transition: all 0.5s;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  .form-wrapper
+  select:hover,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  .form-wrapper
+  select:focus {
+  outline: none;
+  border: 1px solid #a6a6a6;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-status
+  .form-wrapper
+  select
+  option {
+  font-family: "Brandon_Grotesque-Medium", serif;
+  background-color: #fff;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image {
+  border-radius: 5px;
+  margin-top: 5rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-control:nth-child(1) {
+  margin-top: 0;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-wrapper {
+  padding-block: 2rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-wrapper
+  select {
+  font-family: "Chronicle_Display-Light", sans-serif;
+  padding: 15px 12px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  width: 80%;
+  margin-bottom: 1.5rem;
+  /* Replace Default Select Styling (arrow) */
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+  background-position: right 10px top 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  padding-right: 30px;
+  transition: all 0.5s;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-wrapper
+  select:hover,
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-wrapper
+  select:focus {
+  outline: none;
+  border: 1px solid #a6a6a6;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .right-options
+  section.collection-image
+  .form-wrapper
+  select
+  option {
+  font-family: "Brandon_Grotesque-Medium", serif;
+  background-color: #fff;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table {
+  padding-bottom: 2.25rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table {
+  width: 100%;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  tr
+  th {
+  min-width: max-content;
+  border-bottom: 1px solid #333333;
+  padding-inline: 1rem;
+  padding-block: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  tr
+  td {
+  font-family: "Brandon_Grotesque-Regular", serif;
+  padding-inline: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2.3rem;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  text-align: center;
+  letter-spacing: 0.75px;
+  min-width: max-content;
+  vertical-align: top;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  tr
+  td:nth-child(3) {
+  color: #3e8e86;
+  font-weight: 400;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  tr
+  td
+  a {
+  font-size: 1.6rem;
+  margin-bottom: 0;
+  padding-bottom: 0.3rem;
+  color: #578edb;
+  border-bottom: 1px solid #578edb;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  thead
+  tr
+  th {
+  color: #fff;
+  text-transform: uppercase;
+  padding-block: 2rem;
+}
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  section.collection-products-list
+  .products-list-table
+  table
+  tbody
+  tr
+  td {
+  color: #a6a6a6;
+  font-family: "Brandon_Grotesque-Regular", serif;
+  letter-spacing: 0.55px;
+}

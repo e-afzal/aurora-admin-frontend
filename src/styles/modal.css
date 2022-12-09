@@ -1,0 +1,55 @@
+.modal-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modal-background .modal-container {
+  padding: 2rem;
+  padding-inline: 2.5rem;
+  box-shadow: 3px 3px 45px;
+  border-radius: 15px;
+  width: 35%;
+  height: 35%;
+  background-color: #fff;
+}
+.modal-background .modal-container .modal-cancel {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal-background .modal-container .modal-message {
+  padding-top: 3rem;
+}
+.modal-background .modal-container .modal-message p.message {
+  text-align: center;
+  margin-top: 0;
+  padding-left: 5px;
+  padding-top: 5px;
+  color: #000;
+  font-size: 1.6rem;
+}
+.modal-background .modal-container .modal-buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+}
+.modal-background .modal-container .modal-buttons button {
+  padding-block: 2rem;
+  padding-inline: 1rem;
+  border-radius: 5px;
+  display: block;
+  width: 90%;
+}
+.modal-background .modal-container .modal-buttons button:nth-child(1) {
+  background-color: crimson;
+  margin-right: 2rem;
+}

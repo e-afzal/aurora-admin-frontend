@@ -1,0 +1,479 @@
+body .dashboard-grid .dashboard-container {
+  border-left: 1px solid #282828;
+  padding-bottom: 4rem;
+}
+body .dashboard-grid .dashboard-container .divider {
+  border-bottom: 1px solid #282828;
+  width: 100%;
+  height: 3.5rem;
+  margin-bottom: 3rem;
+}
+body .dashboard-grid .dashboard-container section.dashboard-main {
+  padding-inline: clamp(1.5rem, 5vw, 7rem);
+}
+body .dashboard-grid .dashboard-container section.dashboard-main .area-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title {
+  display: flex;
+  align-items: center;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  img {
+  height: 40px;
+  rotate: 180deg;
+  background-color: #232323;
+  border-radius: 3px;
+  padding-block: 10px;
+  padding-inline: 10px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .arrow-title
+  h3 {
+  margin-left: 15px;
+  text-align: center;
+  color: #e6e6e6;
+  font-family: "Avenir-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .semantic.ui.dropdown.selection {
+  margin-top: 1rem;
+  background-color: transparent;
+  border-color: #00c04d;
+  display: block;
+  font-family: "Brandon_Grotesque-Regular";
+  font-size: 16px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .semantic.ui.dropdown.selection
+  i {
+  color: #00c04d;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .semantic.ui.dropdown.selection
+  .text {
+  color: #00c04d;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-header
+  .semantic.ui.dropdown.selection
+  .menu
+  .item {
+  color: #000;
+  font-family: "Brandon_Grotesque-Regular";
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.55px;
+}
+body .dashboard-grid .dashboard-container section.dashboard-main .area-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  .order-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  .order-data
+  section.order-date
+  h4,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  .order-data
+  section.request-date
+  h4 {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  .order-data
+  section.order-date
+  p,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  .order-data
+  section.request-date
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items {
+  margin-top: 6.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  h4 {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-start;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid:nth-child(2) {
+  margin-top: 1.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid
+  .item-detail
+  a {
+  color: #578edb;
+  text-decoration: underline;
+  font-size: 1.6rem;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid
+  .item-detail
+  p {
+  color: #999999;
+  margin-top: 5px;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid
+  p.item-quantity,
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.ordered-items
+  .item-grid
+  p.item-amount {
+  margin-top: 0;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  color: #999999;
+  justify-self: flex-end;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items {
+  margin-top: 6.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items
+  h4 {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Avenir-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items
+  .exchange-item {
+  margin-top: 1.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items
+  .exchange-item
+  .exchange-detail
+  a {
+  color: #578edb;
+  text-decoration: underline;
+  font-size: 1.6rem;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items
+  .exchange-item
+  .exchange-detail
+  p {
+  color: #999999;
+  margin-top: 5px;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .order-details
+  section.exchange-items
+  .exchange-item
+  .exchange-detail
+  p
+  span {
+  color: #e6e6e6;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details {
+  margin-left: auto;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card {
+  background-color: #232323;
+  width: max-content;
+  padding: 3.5rem 5.5rem 3.5rem 3rem;
+  border-radius: 1rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  h4 {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+  letter-spacing: 0.55px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  h5 {
+  color: #fff;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  p {
+  color: #999999;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-name {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-name
+  p {
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-email {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .customer-email
+  p {
+  margin-top: 3px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address
+  p {
+  margin-top: 0;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .shipping-address
+  p:nth-child(2) {
+  margin-top: 5px;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .billing-address {
+  margin-top: 2.5rem;
+}
+body
+  .dashboard-grid
+  .dashboard-container
+  section.dashboard-main
+  .area-grid
+  .customer-details
+  .details-card
+  .billing-address
+  p {
+  margin-top: 5px;
+}

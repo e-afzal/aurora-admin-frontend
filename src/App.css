@@ -1,38 +1,208 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-size: 62.5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  max-width: 1366px;
+  overflow-x: hidden;
+  margin-inline: auto;
+  touch-action: pan-y;
+  justify-self: center;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul {
+  padding: 0;
+  margin-top: 0;
+}
+
+li {
+  list-style: none;
+}
+
+@font-face {
+  font-family: "Brandon_Grotesque-Regular";
+  src: url("./assets/fonts/brandon_grotesque-regular.otf");
+}
+
+@font-face {
+  font-family: "Brandon_Grotesque-Medium";
+  src: url("./assets/fonts/brandon_grotesque-medium.otf");
+}
+
+@font-face {
+  font-family: "Brandon_Grotesque-Bold";
+  src: url("./assets/fonts/brandon_grotesque-bold.otf");
+}
+
+@font-face {
+  font-family: "Chronicle_Display-Light";
+  src: url("./assets/fonts/chronicle_display-light.otf");
+}
+
+@font-face {
+  font-family: "Chronicle_Display-Roman";
+  src: url("./assets/fonts/chronicle_display-roman.otf");
+}
+
+@font-face {
+  font-family: "Avenir-Medium";
+  src: url("./assets/fonts/avenir-medium.ttf");
+}
+
+body {
+  background-color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+}
+
+h1 {
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  line-height: 1.18;
+}
+
+h2 {
+  font-size: clamp(3rem, 5vw, 3.7rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  font-weight: 100;
+  color: #343434;
+}
+
+h3 {
+  font-size: clamp(1.6rem, 5vw, 3.2rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  font-weight: 100;
+  color: #343434;
+}
+
+h4 {
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  font-weight: 100;
+}
+
+h5 {
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  font-weight: 100;
+}
+
+h6 {
+  font-size: 6rem;
+}
+
+p {
+  font-size: clamp(1.45rem, 2.7vw, 1.7rem);
+  font-family: "Chronicle_Display-Roman", sans-serif;
+  margin: 0;
+  line-height: 1.7;
+  letter-spacing: 0.25px;
+  text-align: justify;
+  margin-top: 1.5rem;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+li {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 1.5rem);
+  font-family: "Chronicle_Display-Roman", sans-serif;
+  font-weight: 100;
+  line-height: 1.7;
+  letter-spacing: 0.25px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  font-family: "Brandon_Grotesque-Medium", serif;
+  font-weight: 100;
+}
+
+label {
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  font-family: "Chronicle_Display-Light", sans-serif;
+  font-weight: 100;
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  padding: 1rem 1.5rem;
+  letter-spacing: 0.55px;
+  font-size: 1.5rem;
+  font-family: "Chronicle_Display-Light", sans-serif;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  border-radius: 2.5px;
+  color: #151515;
+  transition: all 0.3s;
+  line-height: 1.5;
+}
+input:focus,
+textarea:focus {
+  border: 1px solid #333333;
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+button {
+  background-color: transparent;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  border-radius: 2.5px;
+  padding-block: 1.7rem;
+  width: 100%;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+p::selection,
+li::selection,
+a::selection,
+span::selection {
+  background-color: rgba(51, 68, 223, 0.5);
+}
+
+body {
+  background-color: #1c1c1c;
 }
