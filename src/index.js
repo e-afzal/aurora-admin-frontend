@@ -11,7 +11,7 @@ root.render(
   <Auth0Provider
     domain={domain}
     clientId={clientId}
-    redirectUri={"https://deluxe-sawine-653ff8.netlify.app/dashboard"}
+    redirectUri={"https://sweet-kashata-43a305.netlify.app/dashboard"}
     cacheLocation="localstorage"
   >
     <App />
