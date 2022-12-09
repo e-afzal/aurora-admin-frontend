@@ -12,7 +12,7 @@ root.render(
     domain={domain}
     clientId={clientId}
     redirectUri={"https://aurora-admin-test.up.railway.app/dashboard"}
-    cacheLocation="localstorage"
+    // cacheLocation="localstorage"
   >
     <App />
   </Auth0Provider>
