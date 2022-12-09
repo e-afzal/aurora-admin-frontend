@@ -7,7 +7,7 @@ const ProtectedLayout = ({ children }) => {
     <>
       {error || !isAuthenticated && !isLoading && <p>Authentication error..</p>}
       {!error && isLoading && <p>Loading...</p>}
-      {!error && !isLoading && (
+      {!error && !isLoading && isAuthenticated && (
         <>
           {children}
         </>
