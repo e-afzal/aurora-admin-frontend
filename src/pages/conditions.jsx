@@ -269,9 +269,9 @@ const Conditions = () => {
                     <textarea
                       name="backup"
                       id="backup-description"
-                      value={conditions.backup}
+                      value={conditions.backups}
                       onChange={handleChange}
-                    >{conditions.backup}</textarea>
+                    >{conditions.backups}</textarea>
                   </div>
                 </div>
               </section>
