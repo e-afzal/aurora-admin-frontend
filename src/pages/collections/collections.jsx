@@ -6,6 +6,7 @@ import axios from 'axios';
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import ModalDelete from '../../components/ModalDelete';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
 const Collections = () => {
   const [collections, setCollections] = useState([]);
@@ -57,59 +58,61 @@ const Collections = () => {
   };
 
   return (
-    <div className="dashboard-grid">
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-      {/* DELETE MODAL */}
-      <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteCollection} />
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+        {/* DELETE MODAL */}
+        <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteCollection} />
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-      <div className="dashboard-container">
-        <div className="divider"></div>
-        <section id="collections-dashboard-main">
-          <div className="area-header">
-            <h3>Collections</h3>
-            <Link to="/dashboard/collections/new">add collection</Link>
-          </div>
-          <div className="area-filters">
-            <input
-              type="search"
-              name="search-product"
-              id="search-product"
-              placeholder="search collection by name"
-              minLength="4"
-              maxLength="30"
-              onChange={handleSearch}
-            />
-            <div className="filter-sort">
-              <button className="filter">filter</button>
-              <button className="sort">sort</button>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section id="collections-dashboard-main">
+            <div className="area-header">
+              <h3>Collections</h3>
+              <Link to="/dashboard/collections/new">add collection</Link>
             </div>
-          </div>
-          <div className="area-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Collection name</th>
-                  <th>Products in Collection</th>
-                  <th>Remove</th>
-                </tr>
-              </thead>
-              <tbody>
-                {finalCollectionData && finalCollectionData.map((eachCollection, index) => (
-                  <tr key={index}>
-                    <td><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/collections/${eachCollection.id}/edit`}>{eachCollection.name}</Link></td>
-                    <td>{eachCollection.products.length} products</td>
-                    <td><img onClick={() => openModal(eachCollection.id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+            <div className="area-filters">
+              <input
+                type="search"
+                name="search-product"
+                id="search-product"
+                placeholder="search collection by name"
+                minLength="4"
+                maxLength="30"
+                onChange={handleSearch}
+              />
+              <div className="filter-sort">
+                <button className="filter">filter</button>
+                <button className="sort">sort</button>
+              </div>
+            </div>
+            <div className="area-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Collection name</th>
+                    <th>Products in Collection</th>
+                    <th>Remove</th>
                   </tr>
-                ))}
+                </thead>
+                <tbody>
+                  {finalCollectionData && finalCollectionData.map((eachCollection, index) => (
+                    <tr key={index}>
+                      <td><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/collections/${eachCollection.id}/edit`}>{eachCollection.name}</Link></td>
+                      <td>{eachCollection.products.length} products</td>
+                      <td><img onClick={() => openModal(eachCollection.id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+                    </tr>
+                  ))}
 
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </ProtectedLayout>
   );
 };
 

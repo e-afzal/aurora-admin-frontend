@@ -8,13 +8,14 @@ import 'react-toastify/dist/ReactToastify.css';
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import Cloudinary from '../../components/Cloudinary';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
-const NewProduct = () => {
+const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
   const [defaultCollection, setDefaultCollection] = useState("");
-  const [originalData, setOriginalDate] = useState({});
+  const [originalData, setOriginalData] = useState({});
   const [product, setProduct] = useState({
     product_id: 0,
     product_title: "",
@@ -36,7 +37,7 @@ const NewProduct = () => {
     axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products/${id}`)
       .then(res => {
         setProduct(res.data);
-        setOriginalDate(res.data);
+        setOriginalData(res.data);
       })
       .catch(error => console.log(error));
   }, [id]);
@@ -283,237 +284,242 @@ const NewProduct = () => {
     axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products/${id}`, { ...product, product_id: id })
       .then((res) => {
         if (res.data.status === "success") {
+          navigate("/dashboard/products");
           //? Show success message from backend
-          toast.success(res.data.message, {
-            position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          setTimeout(() => {
-            navigate("/dashboard/products");
-          }, 4000);
-
+          // toast.success(res.data.message, {
+          //   position: toast.POSITION.BOTTOM_CENTER,
+          //   autoClose: 3500,
+          //   hideProgressBar: true,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "dark",
+          // });
+          // setTimeout(() => {
+          // }, 4000);
         }
       })
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <div className="dashboard-grid">
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-      {originalData.product_title ? (
-        <div className="dashboard-container">
-          <ToastContainer />
-          <div className="divider"></div>
-          <section className="dashboard-main">
-            <div className="area-header">
-              <div className="arrow-title">
-                <img
-                  src="/images/icons/chevron-right-outline-white.svg"
-                  alt="Return Back Icon"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigate("/dashboard/products")}
-                />
-                <h3>{originalData.product_title}</h3>
-              </div>
-              <button onClick={handleSave}>save</button>
-            </div>
-
-            <div className="area-grid">
-              <section className="product-content">
-                <h4>product content</h4>
-                <div className="form-wrapper">
-                  <div className="form-control">
-                    <label htmlFor="product-title">title</label>
-                    <input type="text" name="product_title" id="product-title" value={product.product_title} onChange={(e) => handleChange(e)} />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="product-price">price</label>
-                    <input
-                      type="number"
-                      name="product_price"
-                      id="product-price"
-                      placeholder="E.g. 2500"
-                      value={product.product_price}
-                      onChange={(e) => handleChange(e)} />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="product-description">description</label>
-                    <textarea
-                      value={product.product_description === "\"\"" ? "" : product.product_description}
-                      style={{ resize: "vertical" }}
-                      name="product_description"
-                      id="product-description"
-                      onChange={handleDescription}
-                    ></textarea>
-
-                    <div className="form-control">
-                      <label>Image upload</label>
-                      <Cloudinary handleOpenWidget={handleOpenWidget} images={product.product_images} handleDeleteImage={handleDeleteImage} />
-                    </div>
-                  </div>
+        {originalData.product_title ? (
+          <div className="dashboard-container">
+            <ToastContainer />
+            <div className="divider"></div>
+            <section className="dashboard-main">
+              <div className="area-header">
+                <div className="arrow-title">
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate("/dashboard/products")}
+                  />
+                  <h3>{originalData.product_title}</h3>
                 </div>
-              </section>
-
-              <div className="right-options">
-                <section className="product-status">
-                  <h4 htmlFor="product-status">product status</h4>
-                  <div className="form-wrapper">
-
-                    {/* Product Status select */}
-                    <select name="published">
-                      <option disabled>Select Product Status</option>
-                      <option selected={originalData.published} value={Boolean(true)} onClick={handleSelect}>Active</option>
-                      <option selected={originalData.published === false} value={Boolean(false)} onClick={handleSelect}>Inactive</option>
-                    </select>
-                  </div>
-                </section>
-
-                <section className="product-organization">
-                  <h4>Product Organization</h4>
-                  <div className="form-wrapper">
-                    <div className="form-control">
-                      <label htmlFor="product-type">Type</label>
-                      <select name="product_types" defaultValue={originalData.product_types}>
-                        <option disabled>Select Product Type</option>
-                        {types.map((type, index) => (
-                          <option
-                            key={index}
-                            onClick={handleSelect}
-                            value={type.value}
-                            selected={type.value === originalData.product_types}>{type.title}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="form-control">
-                      <label htmlFor="product-type">Tag</label>
-                      <select name="product_tags">
-                        <option disabled>Select Product Tag</option>
-                        {tags.map((tag, index) => (
-                          <option
-                            onClick={handleSelect}
-                            value={tag.value}
-                            key={index}
-                            selected={tag.value === originalData.product_tags}>{tag.title}</option>
-                        ))}
-
-                      </select>
-                    </div>
-                    <div className="form-control">
-                      <label htmlFor="product-collection">Collection</label>
-                      <select name="collectionId">
-                        <option disabled>Select Collection</option>
-                        {collections.map((collection, index) => (
-                          <option
-                            key={index}
-                            selected={Number(collection.id) === Number(defaultCollection)}
-                            value={collection.id}
-                            onClick={handleSelect}>{collection.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </section>
-                <section className="product-inventory">
-                  <h4>Inventory</h4>
-                  <div className="form-wrapper">
-                    <div className="form-control">
-                      <label htmlFor="product-inventory">Total units for sale</label>
-                      <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
-                    </div>
-                  </div>
-                </section>
+                <button onClick={handleSave}>save</button>
               </div>
 
-              <section className="product-options">
-                <h4>Product Options</h4>
-                <div className="form-wrapper">
+              <div className="area-grid">
+                <section className="product-content">
+                  <h4>product content</h4>
+                  <div className="form-wrapper">
+                    <div className="form-control">
+                      <label htmlFor="product-title">title</label>
+                      <input type="text" name="product_title" id="product-title" value={product.product_title} onChange={(e) => handleChange(e)} />
+                    </div>
 
-                  {originalData.gold_color.values && (
-                    <div className="gold-colors">
-                      <h5>Gold colors</h5>
-                      {goldColors.map((color, index) => (
-                        <div className="form-control" key={index}>
+                    <div className="form-control">
+                      <label htmlFor="product-price">price</label>
+                      <input
+                        type="number"
+                        name="product_price"
+                        id="product-price"
+                        placeholder="E.g. 2500"
+                        value={product.product_price}
+                        onChange={(e) => handleChange(e)} />
+                    </div>
+
+                    <div className="form-control">
+                      <label htmlFor="product-description">description</label>
+                      <textarea
+                        value={product.product_description === "\"\"" ? "" : product.product_description}
+                        style={{ resize: "vertical" }}
+                        name="product_description"
+                        id="product-description"
+                        onChange={handleDescription}
+                      ></textarea>
+
+                      <div className="form-control">
+                        <label>Image upload</label>
+                        <Cloudinary
+                          handleOpenWidget={handleOpenWidget}
+                          images={product.product_images}
+                          handleDeleteImage={handleDeleteImage}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <div className="right-options">
+                  <section className="product-status">
+                    <h4 htmlFor="product-status">product status</h4>
+                    <div className="form-wrapper">
+
+                      {/* Product Status select */}
+                      <select name="published">
+                        <option disabled>Select Product Status</option>
+                        <option selected={originalData.published} value={Boolean(true)} onClick={handleSelect}>Active</option>
+                        <option selected={originalData.published === false} value={Boolean(false)} onClick={handleSelect}>Inactive</option>
+                      </select>
+                    </div>
+                  </section>
+
+                  <section className="product-organization">
+                    <h4>Product Organization</h4>
+                    <div className="form-wrapper">
+                      <div className="form-control">
+                        <label htmlFor="product-type">Type</label>
+                        <select name="product_types" defaultValue={originalData.product_types}>
+                          <option disabled>Select Product Type</option>
+                          {types.map((type, index) => (
+                            <option
+                              key={index}
+                              onClick={handleSelect}
+                              value={type.value}
+                              selected={type.value === originalData.product_types}>{type.title}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="form-control">
+                        <label htmlFor="product-type">Tag</label>
+                        <select name="product_tags">
+                          <option disabled>Select Product Tag</option>
+                          {tags.map((tag, index) => (
+                            <option
+                              onClick={handleSelect}
+                              value={tag.value}
+                              key={index}
+                              selected={tag.value === originalData.product_tags}>{tag.title}</option>
+                          ))}
+
+                        </select>
+                      </div>
+                      <div className="form-control">
+                        <label htmlFor="product-collection">Collection</label>
+                        <select name="collectionId">
+                          <option disabled>Select Collection</option>
+                          {collections.map((collection, index) => (
+                            <option
+                              key={index}
+                              selected={Number(collection.id) === Number(defaultCollection)}
+                              value={collection.id}
+                              onClick={handleSelect}>{collection.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </section>
+                  <section className="product-inventory">
+                    <h4>Inventory</h4>
+                    <div className="form-wrapper">
+                      <div className="form-control">
+                        <label htmlFor="product-inventory">Total units for sale</label>
+                        <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <section className="product-options">
+                  <h4>Product Options</h4>
+                  <div className="form-wrapper">
+
+                    {originalData.gold_color.values && (
+                      <div className="gold-colors">
+                        <h5>Gold colors</h5>
+                        {goldColors.map((color, index) => (
+                          <div className="form-control" key={index}>
+                            <input
+                              type="checkbox"
+                              name="gold_color"
+                              id={color.value}
+                              value={color.value}
+                              onChange={handleGold}
+                              checked={product.gold_color.values.includes(color.value)} />
+                            <label style={{ marginLeft: "3px" }} htmlFor={color.value}>{color.title}</label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="enamels">
+                      <h5>Enamel Options</h5>
+                      {enamelColors.map((enamelColor, index) => (
+                        <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
                           <input
                             type="checkbox"
-                            name="gold_color"
-                            id={color.value}
-                            value={color.value}
-                            onChange={handleGold}
-                            checked={product.gold_color.values.includes(color.value)} />
-                          <label style={{ marginLeft: "3px" }} htmlFor={color.value}>{color.title}</label>
+                            name={enamelColor.name}
+                            id={enamelColor.id}
+                            value={enamelColor.value}
+                            onChange={handleEnamel}
+                            checked={product.enamel_colors.values ? product.enamel_colors.values.includes(enamelColor.value) : false} />
+                          <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
                         </div>
                       ))}
                     </div>
-                  )}
 
-                  <div className="enamels">
-                    <h5>Enamel Options</h5>
-                    {enamelColors.map((enamelColor, index) => (
-                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
-                        <input
-                          type="checkbox"
-                          name={enamelColor.name}
-                          id={enamelColor.id}
-                          value={enamelColor.value}
-                          onChange={handleEnamel}
-                          checked={product.enamel_colors.values ? product.enamel_colors.values.includes(enamelColor.value) : false} />
-                        <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
+                    <div className="sizes">
+                      <h5>Sizes</h5>
+                      <div className="form-control">
+                        <select name="product_size">
+                          <option selected disabled>Select a category</option>
+                          {sizes.map((eachSize, index) => (
+                            <option
+                              value={eachSize.value}
+                              onClick={handleSize}
+                              key={index}>
+                              {eachSize.title}</option>
+                          ))}
+                        </select>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="sizes">
-                    <h5>Sizes</h5>
-                    <div className="form-control">
-                      <select name="product_size">
-                        <option selected disabled>Select a category</option>
-                        {sizes.map((eachSize, index) => (
-                          <option
-                            value={eachSize.value}
-                            onClick={handleSize}
-                            key={index}>
-                            {eachSize.title}</option>
-                        ))}
-                      </select>
                     </div>
-                  </div>
 
-                  <div className="hooks">
-                    <h5 style={{ fontFamily: "Brandon_Grotesque-Medium,serif", color: "#a6a6a6" }}>Hook type</h5>
-                    {hooks.map((each, index) => (
-                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
-                        <input
-                          type="checkbox"
-                          name={each.name}
-                          id={each.value}
-                          value={each.value}
-                          onChange={handleHooks}
-                          checked={product.hook_options.values ? product.hook_options.values.includes(each.value) : false} />
-                        <label htmlFor={each.value}>{each.title}</label>
-                      </div>
-                    ))}
-                  </div>
+                    <div className="hooks">
+                      <h5 style={{ fontFamily: "Brandon_Grotesque-Medium,serif", color: "#a6a6a6" }}>Hook type</h5>
+                      {hooks.map((each, index) => (
+                        <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
+                          <input
+                            type="checkbox"
+                            name={each.name}
+                            id={each.value}
+                            value={each.value}
+                            onChange={handleHooks}
+                            checked={product.hook_options.values ? product.hook_options.values.includes(each.value) : false} />
+                          <label htmlFor={each.value}>{each.title}</label>
+                        </div>
+                      ))}
+                    </div>
 
-                </div>
-              </section>
-            </div>
-          </section >
-        </div >
-      ) : null}
-    </div >
+                  </div>
+                </section>
+              </div>
+            </section >
+          </div >
+        ) : null}
+      </div>
+    </ProtectedLayout>
   );
 };
 
-export default NewProduct;
+export default UpdateProduct;

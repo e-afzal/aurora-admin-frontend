@@ -7,6 +7,7 @@ import '../../styles/collectionEdit.css';
 import Sidebar from '../../components/Sidebar';
 import ModalDelete from '../../components/ModalDelete';
 import Cloudinary from '../../components/Cloudinary';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
 const EditCollection = () => {
   const { id } = useParams();
@@ -119,116 +120,127 @@ const EditCollection = () => {
       status: collection.status,
       image: collection.image
     })
-      .then((res) => console.log(res.data.message))
+      .then((res) => {
+        navigate("/dashboard/collections");
+      })
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <div className="dashboard-grid">
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-      {/* DELETE MODAL */}
-      <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
+        {/* DELETE MODAL */}
+        <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
 
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-      <div className="collectionsEdit-dashboard-container">
-        <div className="divider"></div>
-        <section className="dashboard-main">
-          <div className="area-header">
-            <div className="arrow-title">
-              <img
-                src="/images/icons/chevron-right-outline-white.svg"
-                alt="Return Back Icon"
-                onClick={() => navigate("/dashboard/collections")}
-              />
-              <h3>{collectionTitle}</h3>
-            </div>
-            <button onClick={saveCollection} style={{ width: "max-content" }}>save changes</button>
-          </div>
-
-          <div className="area-grid">
-            <section className="collection-content">
-              <h4>Collection content</h4>
-              <div className="form-wrapper">
-                <div className="form-control">
-                  <label htmlFor="collection-title">Collection title</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="collection-title"
-                    value={collection.name}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-control">
-                  <label htmlFor="collection-description"
-                  >Collection description</label
-                  >
-                  <textarea
-                    name="description"
-                    id="collection-description"
-                    value={collection.description}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
+        <div className="collectionsEdit-dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <div className="arrow-title">
+                <img
+                  src="/images/icons/chevron-right-outline-white.svg"
+                  alt="Return Back Icon"
+                  onClick={() => navigate("/dashboard/collections")}
+                />
+                <h3>Edit collection</h3>
               </div>
-            </section>
-
-            <div className="right-options">
-
-              <section className="collection-status">
-                <h4 htmlFor="collection-status">collection status</h4>
-                <div className="form-wrapper">
-                  <select name=''>
-                    <option disabled>Select Collection Status</option>
-                    <option value="active" onClick={handleSelect} selected={collection.status === "active"}>Active</option>
-                    <option value="inactive" onClick={handleSelect} selected={collection.status === "inactive"}>Inactive</option>
-                  </select>
-                </div>
-              </section>
-
-              <section className="collection-image">
-                <h4>collection image</h4>
-                <div className="form-wrapper">
-                  <Cloudinary handleOpenWidget={handleOpenWidget} images={collection.image} handleDeleteImage={handleDeleteImage} />
-                </div>
-              </section>
+              <button onClick={saveCollection} style={{ width: "max-content" }}>save changes</button>
             </div>
 
-            <section className="collection-products-list">
-              <h4>Products in Collection</h4>
-              {finalProductData.length === 0 ? <p style={{ fontFamily: "Avenir-Medium", color: "crimson", paddingBlock: "2rem", paddingLeft: "2rem", marginTop: "0px" }}>There are no products to display</p> : (
-                (
-                  <div className="products-list-table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Title</th>
-                          <th>Status</th>
-                          <th>Deletion</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {finalProductData.map((eachProduct, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td><Link to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
-                            <td>{eachProduct.published ? "Active" : "Inactive"}</td>
-                            <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+            <div className="area-grid">
+              <section className="collection-content">
+                <h4>Collection content</h4>
+                <div className="form-wrapper">
+                  <div className="form-control">
+                    <label htmlFor="collection-title">Collection title</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="collection-title"
+                      value={collection.name}
+                      onChange={handleChange}
+                    />
                   </div>
-                )
-              )}
-            </section>
-          </div>
-        </section>
+                  <div className="form-control">
+                    <label htmlFor="collection-description"
+                    >Collection description</label
+                    >
+                    <textarea
+                      name="description"
+                      id="collection-description"
+                      value={collection.description}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <div className="right-options">
+
+                <section className="collection-status">
+                  <h4 htmlFor="collection-status">collection status</h4>
+                  <div className="form-wrapper">
+                    <select name=''>
+                      <option disabled>Select Collection Status</option>
+                      <option value="active" onClick={handleSelect} selected={collection.status === "active"}>Active</option>
+                      <option value="inactive" onClick={handleSelect} selected={collection.status === "inactive"}>Inactive</option>
+                    </select>
+                  </div>
+                </section>
+
+                <section className="collection-image">
+                  <h4>collection image</h4>
+                  <div className="form-wrapper">
+                    <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
+                    <div style={{ marginTop: "1rem" }}>
+                      <Cloudinary
+                        handleOpenWidget={handleOpenWidget}
+                        images={collection.image}
+                        handleDeleteImage={handleDeleteImage}
+                      />
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <section className="collection-products-list">
+                <h4>Products in Collection</h4>
+                {finalProductData.length === 0 ? <p style={{ fontFamily: "Avenir-Medium", color: "crimson", paddingBlock: "2rem", paddingLeft: "2rem", marginTop: "0px" }}>There are no products to display</p> : (
+                  (
+                    <div className="products-list-table">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Deletion</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {finalProductData.map((eachProduct, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td><Link to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
+                              <td>{eachProduct.published ? "Active" : "Inactive"}</td>
+                              <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )
+                )}
+              </section>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </ProtectedLayout>
   );
 };
 

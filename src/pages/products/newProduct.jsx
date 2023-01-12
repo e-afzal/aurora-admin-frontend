@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/product.css';
 
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import Cloudinary from '../../components/Cloudinary';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
 const NewProduct = () => {
   const navigate = useNavigate();
@@ -93,6 +94,19 @@ const NewProduct = () => {
       }
     });
     myWidget.open();
+  };
+
+  const handleDeleteImage = (public_id) => {
+    axios.delete(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/collections/delete-image/${public_id}`)
+      .then((res) => {
+        setProduct(prevState => {
+          return {
+            ...prevState,
+            image: { values: product.product_images.values.filter(each => each.public_id !== public_id) }
+          };
+        });
+      })
+      .catch(error => console.log(error.message));
   };
 
   // Handle TEXT-BASED changes
@@ -221,7 +235,7 @@ const NewProduct = () => {
   };
 
   const handleSave = () => {
-    axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products/`, product)
+    axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products`, product)
       .then((res) => {
         if (res.data.status === "success") {
           //? Should show toast with 'res.data.message' of 'success'
@@ -233,120 +247,124 @@ const NewProduct = () => {
   };
 
   return (
-    <div className="dashboard-grid">
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-      <div className="dashboard-container">
-        <div className="divider"></div>
-        <section className="dashboard-main">
-          <div className="area-header">
-            <div className="arrow-title">
-              <img
-                src="/images/icons/chevron-right-outline-white.svg"
-                alt="Return Back Icon"
-                style={{ cursor: "pointer" }}
-                onClick={() => navigate("/dashboard/products")}
-              />
-              <h3>Add product</h3>
-            </div>
-            <button onClick={handleSave}>save</button>
-          </div>
-
-          <div className="area-grid">
-            <section className="product-content">
-              <h4>product content</h4>
-              <div className="form-wrapper">
-                <div className="form-control">
-                  <label htmlFor="product-title">title</label>
-                  <input type="text" name="product_title" id="product-title" value={product.product_title} onChange={(e) => handleChange(e)} />
-                </div>
-                <div className="form-control">
-                  <label htmlFor="product-price">price</label>
-                  <input type="number" name="product_price" id="product-price" placeholder="E.g. 2500" value={product.product_price} onChange={(e) => handleChange(e)} />
-                </div>
-                <div className="form-control">
-                  <label htmlFor="product-description">description</label>
-                  <textarea
-                    style={{ resize: "vertical" }}
-                    name="product_description"
-                    id="product-description"
-                    onChange={handleDescription}
-                  ></textarea>
-                  <div className="form-control">
-                    <label>Image upload</label>
-                    <Cloudinary handleOpenWidget={handleOpenWidget} images={product.product_images} />
-                  </div>
-                </div>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <div className="arrow-title">
+                <img
+                  src="/images/icons/chevron-right-outline-white.svg"
+                  alt="Return Back Icon"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate("/dashboard/products")}
+                />
+                <h3>Add product</h3>
               </div>
-            </section>
-            <div className="right-options">
-              <section className="product-status">
-                <h4 htmlFor="product-status">product status</h4>
-                <div className="form-wrapper">
+              <button onClick={handleSave}>save</button>
+            </div>
 
-                  {/* Product Status select */}
-                  <select name="published">
-                    <option selected disabled>Select Product Status</option>
-                    <option value={true} onClick={handleSelect}>Active</option>
-                    <option value={false} onClick={handleSelect}>Inactive</option>
-                  </select>
-                </div>
-              </section>
-              <section className="product-organization">
-                <h4>Product Organization</h4>
+            <div className="area-grid">
+              <section className="product-content">
+                <h4>product content</h4>
                 <div className="form-wrapper">
                   <div className="form-control">
-                    <label htmlFor="product-type">Type</label>
-                    <select name="product_types">
-                      <option selected disabled>Select Product Type</option>
-                      <option onClick={handleSelect} value="anklets">Anklets</option>
-                      <option onClick={handleSelect} value="bangles">Bangles</option>
-                      <option onClick={handleSelect} value="bracelets">Bracelets</option>
-                      <option onClick={handleSelect} value="chains">Chains</option>
-                      <option onClick={handleSelect} value="cuffs">Cuffs</option>
-                      <option onClick={handleSelect} value="earrings">Earrings</option>
-                      <option onClick={handleSelect} value="necklaces">Necklaces</option>
-                      <option onClick={handleSelect} value="rings">Rings</option>
-                    </select>
+                    <label htmlFor="product-title">title</label>
+                    <input type="text" name="product_title" id="product-title" value={product.product_title} onChange={(e) => handleChange(e)} />
                   </div>
                   <div className="form-control">
-                    <label htmlFor="product-type">Tag</label>
-                    <select name="product_tags">
-                      <option selected disabled>Select Product Tag</option>
-                      <option onClick={handleSelect} value="anklet">Anklet</option>
-                      <option onClick={handleSelect} value="bangle">Bangle</option>
-                      <option onClick={handleSelect} value="bracelet">Bracelet</option>
-                      <option onClick={handleSelect} value="chain">Chain</option>
-                      <option onClick={handleSelect} value="cuff">Cuff</option>
-                      <option onClick={handleSelect} value="earring">Earring</option>
-                      <option onClick={handleSelect} value="necklace">Necklace</option>
-                      <option onClick={handleSelect} value="ring">Ring</option>
-                    </select>
+                    <label htmlFor="product-price">price</label>
+                    <input type="number" name="product_price" id="product-price" placeholder="E.g. 2500" value={product.product_price} onChange={(e) => handleChange(e)} />
                   </div>
                   <div className="form-control">
-                    <label htmlFor="product-collection">Collection</label>
-                    <select name="collectionId">
-                      <option disabled selected >Select Collection</option>
-                      {collections.map((collection, index) => (
-                        <option key={index} value={collection.id} onClick={handleSelect}>{collection.name}</option>
-                      ))}
-                    </select>
+                    <label htmlFor="product-description">description</label>
+                    <textarea
+                      style={{ resize: "vertical" }}
+                      name="product_description"
+                      id="product-description"
+                      onChange={handleDescription}
+                    ></textarea>
+                    <div className="form-control">
+                      <label>Image upload</label>
+                      <Cloudinary
+                        handleOpenWidget={handleOpenWidget}
+                        handleDeleteImage={handleDeleteImage}
+                        images={product.product_images} />
+                    </div>
                   </div>
                 </div>
               </section>
-              <section className="product-inventory">
-                <h4>Inventory</h4>
-                <div className="form-wrapper">
-                  <div className="form-control">
-                    <label htmlFor="product-inventory">Total units for sale</label>
-                    <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
-                  </div>
-                </div>
-              </section></div>
+              <div className="right-options">
+                <section className="product-status">
+                  <h4 htmlFor="product-status">product status</h4>
+                  <div className="form-wrapper">
 
-            {/* <section className="refunds">
+                    {/* Product Status select */}
+                    <select name="published">
+                      <option selected disabled>Select Product Status</option>
+                      <option value={true} onClick={handleSelect}>Active</option>
+                      <option value={false} onClick={handleSelect}>Inactive</option>
+                    </select>
+                  </div>
+                </section>
+                <section className="product-organization">
+                  <h4>Product Organization</h4>
+                  <div className="form-wrapper">
+                    <div className="form-control">
+                      <label htmlFor="product-type">Type</label>
+                      <select name="product_types">
+                        <option selected disabled>Select Product Type</option>
+                        <option onClick={handleSelect} value="anklets">Anklets</option>
+                        <option onClick={handleSelect} value="bangles">Bangles</option>
+                        <option onClick={handleSelect} value="bracelets">Bracelets</option>
+                        <option onClick={handleSelect} value="chains">Chains</option>
+                        <option onClick={handleSelect} value="cuffs">Cuffs</option>
+                        <option onClick={handleSelect} value="earrings">Earrings</option>
+                        <option onClick={handleSelect} value="necklaces">Necklaces</option>
+                        <option onClick={handleSelect} value="rings">Rings</option>
+                      </select>
+                    </div>
+                    <div className="form-control">
+                      <label htmlFor="product-type">Tag</label>
+                      <select name="product_tags">
+                        <option selected disabled>Select Product Tag</option>
+                        <option onClick={handleSelect} value="anklet">Anklet</option>
+                        <option onClick={handleSelect} value="bangle">Bangle</option>
+                        <option onClick={handleSelect} value="bracelet">Bracelet</option>
+                        <option onClick={handleSelect} value="chain">Chain</option>
+                        <option onClick={handleSelect} value="cuff">Cuff</option>
+                        <option onClick={handleSelect} value="earring">Earring</option>
+                        <option onClick={handleSelect} value="necklace">Necklace</option>
+                        <option onClick={handleSelect} value="ring">Ring</option>
+                      </select>
+                    </div>
+                    <div className="form-control">
+                      <label htmlFor="product-collection">Collection</label>
+                      <select name="collectionId">
+                        <option disabled selected >Select Collection</option>
+                        {collections.map((collection, index) => (
+                          <option key={index} value={collection.id} onClick={handleSelect}>{collection.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </section>
+                <section className="product-inventory">
+                  <h4>Inventory</h4>
+                  <div className="form-wrapper">
+                    <div className="form-control">
+                      <label htmlFor="product-inventory">Total units for sale</label>
+                      <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
+                    </div>
+                  </div>
+                </section></div>
+
+              {/* <section className="refunds">
               <h4>Refunds & Exchange</h4>
               <div className="form-wrapper">
                 <p>Is this product eligible for refund or exchange?</p>
@@ -357,63 +375,64 @@ const NewProduct = () => {
               </div>
             </section> */}
 
-            <section className="product-options">
-              <h4>Product Options</h4>
-              <div className="form-wrapper">
-                <div className="gold-colors">
-                  <h5>Gold colors</h5>
-                  <div className="form-control">
-                    <input type="checkbox" name="gold_color" id="yellow" value={"yellow gold"} onClick={handleGold} />
-                    <label style={{ marginLeft: "3px" }} htmlFor="yellow">Yellow Gold</label>
-                  </div>
-                  <div className="form-control">
-                    <input type="checkbox" name="gold_color" id="rose" value={"rose gold"} onClick={handleGold} />
-                    <label style={{ marginLeft: "3px" }} htmlFor="rose">Rose Gold</label>
-                  </div>
-                  <div className="form-control">
-                    <input type="checkbox" name="gold_color" id="white" value={"white gold"} onClick={handleGold} />
-                    <label style={{ marginLeft: "3px" }} htmlFor="white">White Gold</label>
-                  </div>
-                </div>
-
-                <div className="enamels">
-                  <h5>Enamel Options</h5>
-                  {enamelColors.map((enamelColor, index) => (
-                    <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
-                      <input type="checkbox" name={enamelColor.name} id={enamelColor.id} value={enamelColor.value} onClick={handleEnamel} />
-                      <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
+              <section className="product-options">
+                <h4>Product Options</h4>
+                <div className="form-wrapper">
+                  <div className="gold-colors">
+                    <h5>Gold colors</h5>
+                    <div className="form-control">
+                      <input type="checkbox" name="gold_color" id="yellow" value={"yellow gold"} onClick={handleGold} />
+                      <label style={{ marginLeft: "3px" }} htmlFor="yellow">Yellow Gold</label>
                     </div>
-                  ))}
-                </div>
-
-                <div className="sizes">
-                  <h5>Sizes</h5>
-                  <div className="form-control">
-                    <select name="product_size">
-                      <option selected disabled>Select a category</option>
-                      {sizes.map((eachSize, index) => (
-                        <option value={eachSize.value} onClick={handleSize} key={index}>{eachSize.title}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="hooks">
-                  <h5 style={{ fontFamily: "Brandon_Grotesque-Medium,serif", color: "#a6a6a6" }}>Hook type</h5>
-                  {hooks.map((each, index) => (
-                    <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
-                      <input type="checkbox" name={each.name} id={each.value} value={each.value} onClick={handleHooks} />
-                      <label htmlFor={each.value}>{each.title}</label>
+                    <div className="form-control">
+                      <input type="checkbox" name="gold_color" id="rose" value={"rose gold"} onClick={handleGold} />
+                      <label style={{ marginLeft: "3px" }} htmlFor="rose">Rose Gold</label>
                     </div>
-                  ))}
-                </div>
+                    <div className="form-control">
+                      <input type="checkbox" name="gold_color" id="white" value={"white gold"} onClick={handleGold} />
+                      <label style={{ marginLeft: "3px" }} htmlFor="white">White Gold</label>
+                    </div>
+                  </div>
 
-              </div>
-            </section>
-          </div>
-        </section>
+                  <div className="enamels">
+                    <h5>Enamel Options</h5>
+                    {enamelColors.map((enamelColor, index) => (
+                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
+                        <input type="checkbox" name={enamelColor.name} id={enamelColor.id} value={enamelColor.value} onClick={handleEnamel} />
+                        <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="sizes">
+                    <h5>Sizes</h5>
+                    <div className="form-control">
+                      <select name="product_size">
+                        <option selected disabled>Select a category</option>
+                        {sizes.map((eachSize, index) => (
+                          <option value={eachSize.value} onClick={handleSize} key={index}>{eachSize.title}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="hooks">
+                    <h5 style={{ fontFamily: "Brandon_Grotesque-Medium,serif", color: "#a6a6a6" }}>Hook type</h5>
+                    {hooks.map((each, index) => (
+                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
+                        <input type="checkbox" name={each.name} id={each.value} value={each.value} onClick={handleHooks} />
+                        <label htmlFor={each.value}>{each.title}</label>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </ProtectedLayout>
   );
 };
 

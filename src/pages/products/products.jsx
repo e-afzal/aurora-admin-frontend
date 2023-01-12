@@ -6,6 +6,7 @@ import axios from 'axios';
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import ModalDelete from '../../components/ModalDelete';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -56,63 +57,64 @@ const Products = () => {
   };
 
   return (
-    <div className="dashboard-grid">
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-      {/* DELETE MODAL */}
-      <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+        {/* DELETE MODAL */}
+        <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-      <div className="dashboard-container">
-        <div className="divider"></div>
-        <section className="dashboard-main">
-          <div className="area-header">
-            <h3>Products</h3>
-            <a href="/dashboard/products/new">add product</a>
-          </div>
-          <div className="area-filters">
-            <input
-              type="search"
-              name="search-product"
-              id="search-product"
-              placeholder="search product by name"
-              minLength="4"
-              maxLength="30"
-              onChange={handleSearch}
-            />
-            <div className="filter-sort">
-              <button className="filter">filter</button>
-              <button className="sort">sort</button>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <h3>Products</h3>
+              <Link to={"/dashboard/products/new"}>add product</Link>
             </div>
-          </div>
-          <div className="area-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Status</th>
-                  <th>Type</th>
-                  <th>Inventory</th>
-                  <th>Remove</th>
-                </tr>
-              </thead>
-              <tbody>
-                {finalProductData && finalProductData.map((eachProduct, index) => (
-                  <tr key={index}>
-                    <td ><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
-                    <td>{eachProduct.published ? "active" : "inactive"}</td>
-                    <td>{eachProduct.product_types}</td>
-                    <td>5 units in stock</td>
-                    <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+            <div className="area-filters">
+              <input
+                type="search"
+                name="search-product"
+                id="search-product"
+                placeholder="search product by name"
+                minLength="4"
+                maxLength="30"
+                onChange={handleSearch}
+              />
+              <div className="filter-sort">
+                <button className="filter">filter</button>
+                <button className="sort">sort</button>
+              </div>
+            </div>
+            <div className="area-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Inventory</th>
+                    <th>Remove</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {finalProductData && finalProductData.map((eachProduct, index) => (
+                    <tr key={index}>
+                      <td ><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
+                      <td>{eachProduct.published ? "active" : "inactive"}</td>
+                      <td>{eachProduct.product_types}</td>
+                      <td>5 units in stock</td>
+                      <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
-
+    </ProtectedLayout>
   );
 };
 

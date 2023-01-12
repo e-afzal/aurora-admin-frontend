@@ -6,6 +6,7 @@ import '../../styles/collectionEdit.css';
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import Cloudinary from '../../components/Cloudinary';
+import ProtectedLayout from '../../components/ProtectedLayout';
 
 const AddCollection = () => {
   const navigate = useNavigate();
@@ -73,8 +74,6 @@ const AddCollection = () => {
       .catch(error => console.log(error.message));
   };
 
-  console.log(collection);
-
   const saveCollection = () => {
     //! 'products' is not being posted since it is RELATIONAL and is being fetched accordingly by the backend
     axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/collections`, {
@@ -83,7 +82,9 @@ const AddCollection = () => {
       status: collection.status,
       image: collection.image
     })
-      .then((res) => console.log(res.data.message))
+      .then((res) => {
+        navigate("/dashboard/collections");
+      })
       .catch((error) => console.log(error.message));
   };
 
@@ -152,7 +153,14 @@ const AddCollection = () => {
               <section className="collection-image">
                 <h4>collection image</h4>
                 <div className="form-wrapper">
-                  <Cloudinary handleOpenWidget={handleOpenWidget} images={collection.image} handleDeleteImage={handleDeleteImage} />
+                  <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
+                  <div style={{ marginTop: "1rem" }}>
+                    <Cloudinary
+                      handleOpenWidget={handleOpenWidget}
+                      images={collection.image}
+                      handleDeleteImage={handleDeleteImage}
+                    />
+                  </div>
                 </div>
               </section>
             </div>

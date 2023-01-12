@@ -31,12 +31,12 @@ const Sidebar = ({ activePage }) => {
             alt="Product Link Icon"
             style={{ backgroundColor: `${activePage === "products" ? "#2e2e2e" : "none"}` }}
           /></Link>
-        <Link to="/dashboard/refunds" className="refunds-link"
+        {/* <Link to="/dashboard/refunds" className="refunds-link"
         ><img
             src="/images/icons/exchange-icon.svg"
             alt="Refunds Link Icon"
             style={{ backgroundColor: `${activePage === "refunds" ? "#2e2e2e" : "none"}` }}
-          /></Link>
+          /></Link> */}
         <Link to="/dashboard/orders" className="order-link"
         ><img
             src="/images/icons/orders-icon-dark.svg"
@@ -49,7 +49,7 @@ const Sidebar = ({ activePage }) => {
             alt="Customer Link Icon"
             style={{ backgroundColor: `${activePage === "customers" ? "#2e2e2e" : "none"}` }}
           /></Link>
-        <Link to="/conditions" className="conditions-link"
+        <Link to="/dashboard/conditions" className="conditions-link"
         ><img
             src="/images/icons/conditions-icon-dark.svg"
             alt="Conditions Link Icon"

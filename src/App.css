@@ -144,7 +144,8 @@ label {
   letter-spacing: 0.5px;
   margin-bottom: 5px;
   font-size: clamp(1.4rem, 2vw, 1.6rem);
-  font-family: "Chronicle_Display-Light", sans-serif;
+  /* font-family: "Chronicle_Display-Light", sans-serif; */
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
   font-weight: 100;
 }
 

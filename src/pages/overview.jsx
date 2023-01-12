@@ -63,15 +63,17 @@ const Overview = () => {
               <div className="dashboard-card">
                 <h4 className="card-title">Products</h4>
                 <ul>
+                  <li><Link to="/dashboard/main-collections">view main collections</Link></li>
+                  <li><Link to="/dashboard/collections">view sub collections</Link></li>
+                  <li><Link to="/dashboard/categories">view categories list</Link></li>
                   <li><Link to="/dashboard/products">view products list</Link></li>
-                  <li><Link to="/dashboard/collections">view collections</Link></li>
                 </ul>
                 <img
                   src="/images/icons/products-icon-dark.svg"
                   alt="Faded Product Icon"
                 />
               </div>
-              <div className="dashboard-card">
+              {/* <div className="dashboard-card">
                 <h4 className="card-title">Refunds & Exchanges</h4>
                 <ul>
                   <li><Link to="/dashboard/refunds">View R&E List</Link></li>
@@ -80,7 +82,7 @@ const Overview = () => {
                   src="/images/icons/exchange-icon.svg"
                   alt="Faded Product Icon"
                 />
-              </div>
+              </div> */}
               <div className="dashboard-card">
                 <h4 className="card-title">Orders</h4>
                 <ul>
@@ -107,7 +109,7 @@ const Overview = () => {
                   Conditions
                 </h4>
                 <ul>
-                  <li><Link to="/conditions">view and edit T&C</Link></li>
+                  <li><Link to="/dashboard/conditions">view and edit T&C</Link></li>
                 </ul>
                 <img
                   src="/images/icons/conditions-icon-dark.svg"
