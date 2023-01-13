@@ -200,7 +200,7 @@ body
   label {
   color: #a6a6a6;
   display: block;
-  font-family: "Brandon_Grotesque-Medium", serif;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
   text-transform: capitalize;
 }
 body
@@ -221,7 +221,7 @@ body
   background-color: transparent;
   border: 2px solid #282828;
   color: #fff;
-  font-family: "Brandon_Grotesque-Regular", serif;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
   font-size: 16px;
 }
 body
@@ -332,7 +332,7 @@ body
   letter-spacing: 1px;
   border-color: transparent;
   background-color: #282828;
-  font-family: "Brandon_Grotesque-Regular", serif;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
   font-size: 1.4rem;
 }
 body
@@ -378,7 +378,7 @@ body
   .form-wrapper
   select
   option {
-  font-family: "Brandon_Grotesque-Medium", serif;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
   /* background-color: #fff; */
 }
 body
@@ -420,22 +420,17 @@ body
   section.product-organization
   .form-wrapper
   select {
-  font-family: "Chronicle_Display-Light", sans-serif;
-  padding: 15px 12px;
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  width: 80%;
-  margin-bottom: 1.5rem;
-  /* Replace Default Select Styling (arrow) */
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
-  background-position: right 10px top 50%;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  padding-right: 30px;
-  transition: all 0.5s;
+  padding: 1rem;
+  border-radius: 3px;
+  border-width: 1px;
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-color: transparent;
+  background-color: #282828;
+  font-family: "Brandon_Grotesque-Regular", sans-serif;
+  font-size: 1.4rem;
 }
 body
   .dashboard-grid
@@ -456,7 +451,6 @@ body
   .form-wrapper
   select:focus {
   outline: none;
-  border: 1px solid #a6a6a6;
 }
 body
   .dashboard-grid
@@ -468,8 +462,7 @@ body
   .form-wrapper
   select
   option {
-  font-family: "Brandon_Grotesque-Medium", serif;
-  background-color: #fff;
+  background-color: #282828;
 }
 body
   .dashboard-grid
@@ -663,7 +656,7 @@ body
   .sizes
   h5 {
   color: #a6a6a6;
-  font-family: "Brandon_Grotesque-Medium", serif;
+  font-family: "Brandon_Grotesque-Medium", sans-serif;
 }
 body
   .dashboard-grid

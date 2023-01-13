@@ -21,6 +21,8 @@ const Customer = () => {
       .catch(error => console.log(error));
   }, [id]);
 
+  console.log(user);
+
   if (user === null) {
     return (
       <h1>Loading..</h1>

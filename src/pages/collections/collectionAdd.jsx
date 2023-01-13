@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../../styles/collectionEdit.css';
@@ -10,12 +10,23 @@ import ProtectedLayout from '../../components/ProtectedLayout';
 
 const AddCollection = () => {
   const navigate = useNavigate();
+  const [mainCollection, setMainCollection] = useState(null);
   const [collection, setCollection] = useState({
     description: "",
     image: { values: [] },
     name: "",
-    status: ""
+    status: "",
+    mainCollectionId: ""
   });
+
+  //? Fetch Main Collections to populate 'select' tag
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/main-collections`)
+      .then((res) => {
+        setMainCollection(res.data);
+      })
+      .catch(error => console.log(error.message));
+  }, []);
 
   // HANDLERS
   const handleChange = (e) => {
@@ -27,11 +38,20 @@ const AddCollection = () => {
     });
   };
 
-  const handleSelect = (e) => {
+  const handleStatus = (e) => {
     setCollection(prevState => {
       return {
         ...prevState,
         status: e.target.value
+      };
+    });
+  };
+
+  const handleMainCollection = (e) => {
+    setCollection(prevState => {
+      return {
+        ...prevState,
+        mainCollectionId: e.target.value
       };
     });
   };
@@ -88,88 +108,110 @@ const AddCollection = () => {
       .catch((error) => console.log(error.message));
   };
 
-  return (
-    <div className="dashboard-grid">
+  if (mainCollection === null) {
+    return (
+      <h1>Loading..</h1>
+    );
+  }
 
-      {/* SIDEBAR */}
-      <Sidebar activePage={"products"} />
+  if (mainCollection !== null) {
+    return (
+      <ProtectedLayout>
+        <div className="dashboard-grid">
 
-      <div className="collectionsEdit-dashboard-container">
-        <div className="divider"></div>
-        <section className="dashboard-main">
-          <div className="area-header">
-            <div className="arrow-title">
-              <img
-                src="/images/icons/chevron-right-outline-white.svg"
-                alt="Return Back Icon"
-                onClick={() => navigate("/dashboard/collections")}
-              />
-              <h3>Add new collection</h3>
-            </div>
-            <button onClick={saveCollection} style={{ width: "max-content" }}>save collection</button>
-          </div>
+          {/* SIDEBAR */}
+          <Sidebar activePage={"products"} />
 
-          <div className="area-grid">
-            <section className="collection-content">
-              <h4>Collection content</h4>
-              <div className="form-wrapper">
-                <div className="form-control">
-                  <label htmlFor="collection-title">Collection title</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="collection-title"
-                    value={collection.name}
-                    onChange={handleChange}
+          <div className="collectionsEdit-dashboard-container">
+            <div className="divider"></div>
+            <section className="dashboard-main">
+              <div className="area-header">
+                <div className="arrow-title">
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                    onClick={() => navigate("/dashboard/collections")}
                   />
+                  <h3>Add new collection</h3>
                 </div>
-                <div className="form-control">
-                  <label htmlFor="collection-description"
-                  >Collection description</label
-                  >
-                  <textarea
-                    name="description"
-                    id="collection-description"
-                    value={collection.description}
-                    onChange={handleChange}
-                  ></textarea>
+                <button onClick={saveCollection} style={{ width: "max-content" }}>save collection</button>
+              </div>
+
+              <div className="area-grid">
+                <section className="collection-content">
+                  <h4>Collection content</h4>
+                  <div className="form-wrapper">
+                    <div className="form-control">
+                      <label htmlFor="collection-title">Collection title</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="collection-title"
+                        value={collection.name}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="form-control">
+                      <label htmlFor="collection-description"
+                      >Collection description</label>
+                      <textarea
+                        name="description"
+                        id="collection-description"
+                        value={collection.description}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+
+                    <div className="form-control">
+                      <label>Main Collection</label>
+                      <select name="main-collection" className='main-collection-select'>
+                        <option disabled selected >Select Main Collection</option>
+                        {mainCollection.map((main, index) => (
+                          <option key={index} value={main.id} onClick={handleMainCollection}>{main.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                  </div>
+                </section>
+
+                <div className="right-options">
+
+                  <section className="collection-status">
+                    <h4 htmlFor="collection-status">collection status</h4>
+                    <div className="form-wrapper">
+                      <select name=''>
+                        <option disabled>Select Collection Status</option>
+                        <option value="active" onClick={handleStatus} selected={collection.status === "active"}>Active</option>
+                        <option value="inactive" onClick={handleStatus} selected={collection.status === "inactive"}>Inactive</option>
+                      </select>
+                    </div>
+                  </section>
+
+                  <section className="collection-image">
+                    <h4>collection image</h4>
+                    <div className="form-wrapper">
+                      <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
+                      <div style={{ marginTop: "1rem" }}>
+                        <Cloudinary
+                          handleOpenWidget={handleOpenWidget}
+                          images={collection.image}
+                          handleDeleteImage={handleDeleteImage}
+                        />
+                      </div>
+                    </div>
+                  </section>
                 </div>
+
               </div>
             </section>
-
-            <div className="right-options">
-
-              <section className="collection-status">
-                <h4 htmlFor="collection-status">collection status</h4>
-                <div className="form-wrapper">
-                  <select name=''>
-                    <option disabled>Select Collection Status</option>
-                    <option value="active" onClick={handleSelect} selected={collection.status === "active"}>Active</option>
-                    <option value="inactive" onClick={handleSelect} selected={collection.status === "inactive"}>Inactive</option>
-                  </select>
-                </div>
-              </section>
-
-              <section className="collection-image">
-                <h4>collection image</h4>
-                <div className="form-wrapper">
-                  <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
-                  <div style={{ marginTop: "1rem" }}>
-                    <Cloudinary
-                      handleOpenWidget={handleOpenWidget}
-                      images={collection.image}
-                      handleDeleteImage={handleDeleteImage}
-                    />
-                  </div>
-                </div>
-              </section>
-            </div>
-
           </div>
-        </section>
-      </div>
-    </div>
-  );
+        </div>
+      </ProtectedLayout>
+    );
+  }
+
+
 };
 
 export default AddCollection;

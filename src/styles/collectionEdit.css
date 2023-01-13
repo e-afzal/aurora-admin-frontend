@@ -276,6 +276,27 @@ body
   textarea {
   resize: vertical;
 }
+
+body
+  .dashboard-grid
+  .collectionsEdit-dashboard-container
+  section.dashboard-main
+  .area-grid
+  .form-control
+  select.main-collection-select {
+  padding: 1rem;
+  border-radius: 3px;
+  border-width: 1px;
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-color: transparent;
+  background-color: #282828;
+  font-family: "Brandon_Grotesque-Regular", serif;
+  font-size: 1.4rem;
+}
+
 body
   .dashboard-grid
   .collectionsEdit-dashboard-container
@@ -334,22 +355,6 @@ body
   background-color: #282828;
   font-family: "Brandon_Grotesque-Regular", serif;
   font-size: 1.4rem;
-  /* font-family: "Chronicle_Display-Light", sans-serif;
-  padding: 15px 12px;
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  width: 80%;
-  margin-bottom: 1.5rem; */
-  /* Replace Default Select Styling (arrow) */
-  /* appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
-  background-position: right 10px top 50%;
-  background-repeat: no-repeat;
-  background-size: 10px;
-  padding-right: 30px;
-  transition: all 0.5s; */
 }
 body
   .dashboard-grid

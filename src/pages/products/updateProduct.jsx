@@ -13,9 +13,9 @@ import ProtectedLayout from '../../components/ProtectedLayout';
 const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState(null);
   const [defaultCollection, setDefaultCollection] = useState("");
-  const [originalData, setOriginalData] = useState({});
+  const [originalData, setOriginalData] = useState(null);
   const [product, setProduct] = useState({
     product_id: 0,
     product_title: "",
@@ -44,22 +44,13 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     // Get collections to populate collection 'select' options
-    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/collections`)
+    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/collections/select/${id}`)
       .then(res => {
-        const modifiedCollection = res.data.map(eachCollection => {
-          return {
-            id: eachCollection.id,
-            name: eachCollection.name
-          };
-        });
-        setCollections(modifiedCollection);
-
-        //? Finding collection by 'id' to show collection to which product belongs to in 'select' tag
-        const foundCollection = collections.find(collection => collection.id === originalData.collectionId);
-        setDefaultCollection(foundCollection && foundCollection.id);
+        setCollections(res.data.collections);
+        setDefaultCollection(res.data.collectionId);
       })
       .catch(error => console.log(error.message));
-  }, [originalData]);
+  }, [id]);
 
   // Boilerplate
   const types = [
@@ -70,16 +61,6 @@ const UpdateProduct = () => {
     { value: "earrings", title: "Earrings" },
     { value: "necklaces", title: "Necklaces" },
     { value: "rings", title: "Rings" },
-  ];
-
-  const tags = [
-    { value: "anklet", title: "Anklet" },
-    { value: "bangle", title: "Bangle" },
-    { value: "bracelet", title: "Bracelet" },
-    { value: "cuff", title: "Cuff" },
-    { value: "earring", title: "Earring" },
-    { value: "necklace", title: "Necklace" },
-    { value: "ring", title: "Ring" },
   ];
 
   const enamelColors = [
@@ -100,10 +81,10 @@ const UpdateProduct = () => {
   ];
 
   const sizes = [
-    { name: "sizes", value: "bangle", title: "Bangle", sizes: ["15cm", "15.5cm", "16cm", "16.5cm", "17cm", "18cm"] },
-    { name: "sizes", value: "bracelet", title: "Bracelet", sizes: ["13.4cm", "14.6cm", "15.9cm", "17.2cm", "18.4cm"] },
-    { name: "sizes", value: "necklace", title: "Necklace", sizes: ["38cm", "40cm", "42cm", "45cm", "50cm", "53cm", "60cm", "70cm"] },
-    { name: "sizes", value: "ring", title: "Ring", sizes: ["3cm", "3.5cm", "4cm", "4.5cm", "5cm", "5.5cm", "6cm", "6.5cm", "7cm", "7.5cm", "8cm", "8.5cm", "9cm", "9.5cm", "10cm", "10.5cm", "11cm", "11.5cm", "12cm", "12.5cm", "13cm"] },
+    { name: "sizes", value: "bangles", title: "Bangles", sizes: ["15cm", "15.5cm", "16cm", "16.5cm", "17cm", "18cm"] },
+    { name: "sizes", value: "bracelets", title: "Bracelets", sizes: ["13.4cm", "14.6cm", "15.9cm", "17.2cm", "18.4cm"] },
+    { name: "sizes", value: "necklaces", title: "Necklaces", sizes: ["38cm", "40cm", "42cm", "45cm", "50cm", "53cm", "60cm", "70cm"] },
+    { name: "sizes", value: "rings", title: "Rings", sizes: ["3cm", "3.5cm", "4cm", "4.5cm", "5cm", "5.5cm", "6cm", "6.5cm", "7cm", "7.5cm", "8cm", "8.5cm", "9cm", "9.5cm", "10cm", "10.5cm", "11cm", "11.5cm", "12cm", "12.5cm", "13cm"] },
   ];
 
   const goldColors = [
@@ -303,14 +284,21 @@ const UpdateProduct = () => {
       .catch((error) => console.log(error.message));
   };
 
-  return (
-    <ProtectedLayout>
-      <div className="dashboard-grid">
+  if (collections === null) {
+    return (
+      <h1>Loading..</h1>
+    );
+  }
 
-        {/* SIDEBAR */}
-        <Sidebar activePage={"products"} />
+  if (collections !== null) {
+    return (
+      <ProtectedLayout>
+        <div className="dashboard-grid">
 
-        {originalData.product_title ? (
+          {/* SIDEBAR */}
+          <Sidebar activePage={"products"} />
+
+
           <div className="dashboard-container">
             <ToastContainer />
             <div className="divider"></div>
@@ -325,7 +313,7 @@ const UpdateProduct = () => {
                   />
                   <h3>{originalData.product_title}</h3>
                 </div>
-                <button onClick={handleSave}>save</button>
+                <button onClick={handleSave}>update product</button>
               </div>
 
               <div className="area-grid">
@@ -401,20 +389,20 @@ const UpdateProduct = () => {
                         </select>
                       </div>
 
-                      <div className="form-control">
-                        <label htmlFor="product-type">Tag</label>
-                        <select name="product_tags">
-                          <option disabled>Select Product Tag</option>
-                          {tags.map((tag, index) => (
-                            <option
-                              onClick={handleSelect}
-                              value={tag.value}
-                              key={index}
-                              selected={tag.value === originalData.product_tags}>{tag.title}</option>
-                          ))}
-
-                        </select>
-                      </div>
+                      {/* <div className="form-control">
+                          <label htmlFor="product-type">Tag</label>
+                          <select name="product_tags">
+                            <option disabled>Select Product Tag</option>
+                            {types.map((type, index) => (
+                              <option
+                                onClick={handleSelect}
+                                value={type.value}
+                                key={index}
+                                selected={type.value === originalData.product_tags}>{type.title}</option>
+                            ))}
+  
+                          </select>
+                        </div> */}
                       <div className="form-control">
                         <label htmlFor="product-collection">Collection</label>
                         <select name="collectionId">
@@ -481,7 +469,7 @@ const UpdateProduct = () => {
 
                     <div className="sizes">
                       <h5>Sizes</h5>
-                      <div className="form-control">
+                      <div className="form-control" style={{ width: "100%" }}>
                         <select name="product_size">
                           <option selected disabled>Select a category</option>
                           {sizes.map((eachSize, index) => (
@@ -516,10 +504,12 @@ const UpdateProduct = () => {
               </div>
             </section >
           </div >
-        ) : null}
-      </div>
-    </ProtectedLayout>
-  );
+        </div>
+      </ProtectedLayout>
+    );
+  }
+
+
 };
 
 export default UpdateProduct;

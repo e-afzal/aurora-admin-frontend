@@ -24,7 +24,7 @@ const Customers = () => {
     );
   }
 
-  if (users !== null && users.status === "success") {
+  if (users !== null) {
     return (
       <ProtectedLayout>
         <div className="dashboard-grid">
@@ -68,8 +68,8 @@ const Customers = () => {
                       <tr key={index}>
                         <td><input type="checkbox" /></td>
                         <td><Link to={`/dashboard/customers/${eachUser.id}`}>{`${eachUser.first_name} ${eachUser.last_name}`}</Link></td>
-                        <td>{`${eachUser.addresses[0].city}${eachUser.addresses[0].country}` || "N/A"}</td>
-                        <td>{eachUser.orders.length} {eachUser.orders.length > 1 ? "orders" : "order"}</td>
+                        <td>{`${eachUser.addresses.city}, ${eachUser.addresses.country}` || "N/A"}</td>
+                        <td>{eachUser.orders.length} {eachUser.orders.length === 1 ? "order" : "orders"}</td>
                         {/* <td>AED {eachUser.orderTotal.toFixed(2)}</td> */}
                       </tr>
                     ))}

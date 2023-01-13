@@ -18,8 +18,6 @@ const Orders = () => {
       .catch(error => console.log(error));
   }, []);
 
-  console.log(orders);
-
   // CURRENCY LOCALIZATION Function
   function localize(amount) {
     return Intl.NumberFormat("en-AE", { style: "currency", currency: "AED" }).format(amount);

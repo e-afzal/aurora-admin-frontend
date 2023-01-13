@@ -16,13 +16,15 @@ const EditCollection = () => {
   const [finalProductData, setFinalProductData] = useState([]);
   const [productId, setProductId] = useState(0);
   const [collectionTitle, setCollectionTitle] = useState("");
+  const [mainCollection, setMainCollection] = useState([]);
   const [collection, setCollection] = useState({
     id: 0,
     description: "",
     image: { values: [] },
     name: "",
     products: [],
-    status: ""
+    status: "",
+    mainCollectionId: null
   });
 
   useEffect(() => {
@@ -34,6 +36,15 @@ const EditCollection = () => {
       })
       .catch((error) => console.log(error.message));
   }, [id]);
+
+  //? Fetch Main Collections to populate 'select' tag
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/main-collections`)
+      .then((res) => {
+        setMainCollection(res.data);
+      })
+      .catch(error => console.log(error.message));
+  }, []);
 
   // HANDLERS
   //? Pass Modal state and ID to the 'ModalDelete' component
@@ -61,6 +72,15 @@ const EditCollection = () => {
       return {
         ...prevState,
         [e.target.name]: e.target.value
+      };
+    });
+  };
+
+  const handleMainCollection = (e) => {
+    setCollection(prevState => {
+      return {
+        ...prevState,
+        mainCollectionId: Number(e.target.value)
       };
     });
   };
@@ -118,7 +138,8 @@ const EditCollection = () => {
       name: collection.name,
       description: collection.description,
       status: collection.status,
-      image: collection.image
+      image: collection.image,
+      mainCollectionId: collection.mainCollectionId
     })
       .then((res) => {
         navigate("/dashboard/collections");
@@ -126,122 +147,147 @@ const EditCollection = () => {
       .catch((error) => console.log(error.message));
   };
 
-  return (
-    <ProtectedLayout>
-      <div className="dashboard-grid">
+  if (collection === null) {
+    return (
+      <h1>Loading..</h1>
+    );
+  }
 
-        {/* DELETE MODAL */}
-        <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
+  if (collection !== null) {
+    return (
+      <ProtectedLayout>
+        <div className="dashboard-grid">
 
-        {/* SIDEBAR */}
-        <Sidebar activePage={"products"} />
+          {/* DELETE MODAL */}
+          <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteProduct} />
 
-        <div className="collectionsEdit-dashboard-container">
-          <div className="divider"></div>
-          <section className="dashboard-main">
-            <div className="area-header">
-              <div className="arrow-title">
-                <img
-                  src="/images/icons/chevron-right-outline-white.svg"
-                  alt="Return Back Icon"
-                  onClick={() => navigate("/dashboard/collections")}
-                />
-                <h3>Edit collection</h3>
-              </div>
-              <button onClick={saveCollection} style={{ width: "max-content" }}>save changes</button>
-            </div>
+          {/* SIDEBAR */}
+          <Sidebar activePage={"products"} />
 
-            <div className="area-grid">
-              <section className="collection-content">
-                <h4>Collection content</h4>
-                <div className="form-wrapper">
-                  <div className="form-control">
-                    <label htmlFor="collection-title">Collection title</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="collection-title"
-                      value={collection.name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-control">
-                    <label htmlFor="collection-description"
-                    >Collection description</label
-                    >
-                    <textarea
-                      name="description"
-                      id="collection-description"
-                      value={collection.description}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
+          <div className="collectionsEdit-dashboard-container">
+            <div className="divider"></div>
+            <section className="dashboard-main">
+              <div className="area-header">
+                <div className="arrow-title">
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                    onClick={() => navigate("/dashboard/collections")}
+                  />
+                  <h3>Edit collection</h3>
                 </div>
-              </section>
+                <button onClick={saveCollection} style={{ width: "max-content" }}>save changes</button>
+              </div>
 
-              <div className="right-options">
-
-                <section className="collection-status">
-                  <h4 htmlFor="collection-status">collection status</h4>
+              <div className="area-grid">
+                <section className="collection-content">
+                  <h4>Collection content</h4>
                   <div className="form-wrapper">
-                    <select name=''>
-                      <option disabled>Select Collection Status</option>
-                      <option value="active" onClick={handleSelect} selected={collection.status === "active"}>Active</option>
-                      <option value="inactive" onClick={handleSelect} selected={collection.status === "inactive"}>Inactive</option>
-                    </select>
-                  </div>
-                </section>
-
-                <section className="collection-image">
-                  <h4>collection image</h4>
-                  <div className="form-wrapper">
-                    <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
-                    <div style={{ marginTop: "1rem" }}>
-                      <Cloudinary
-                        handleOpenWidget={handleOpenWidget}
-                        images={collection.image}
-                        handleDeleteImage={handleDeleteImage}
+                    <div className="form-control">
+                      <label htmlFor="collection-title">Collection title</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="collection-title"
+                        value={collection.name}
+                        onChange={handleChange}
                       />
                     </div>
+                    <div className="form-control">
+                      <label htmlFor="collection-description"
+                      >Collection description</label
+                      >
+                      <textarea
+                        name="description"
+                        id="collection-description"
+                        value={collection.description}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+
+                    <div className="form-control">
+                      <label>Main Collection</label>
+                      <select name="main-collection" className='main-collection-select'>
+                        <option disabled selected>Select Main Collection</option>
+                        {mainCollection.map((main, index) => (
+                          <option
+                            key={index}
+                            value={main.id}
+                            onClick={handleMainCollection}
+                            selected={Number(collection.mainCollectionId) === Number(main.id)}>{main.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
                   </div>
                 </section>
-              </div>
 
-              <section className="collection-products-list">
-                <h4>Products in Collection</h4>
-                {finalProductData.length === 0 ? <p style={{ fontFamily: "Avenir-Medium", color: "crimson", paddingBlock: "2rem", paddingLeft: "2rem", marginTop: "0px" }}>There are no products to display</p> : (
-                  (
-                    <div className="products-list-table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Status</th>
-                            <th>Deletion</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {finalProductData.map((eachProduct, index) => (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td><Link to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
-                              <td>{eachProduct.published ? "Active" : "Inactive"}</td>
-                              <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                <div className="right-options">
+
+                  <section className="collection-status">
+                    <h4 htmlFor="collection-status">collection status</h4>
+                    <div className="form-wrapper">
+                      <select name=''>
+                        <option disabled>Select Collection Status</option>
+                        <option value="active" onClick={handleSelect} selected={collection.status === "active"}>Active</option>
+                        <option value="inactive" onClick={handleSelect} selected={collection.status === "inactive"}>Inactive</option>
+                      </select>
                     </div>
-                  )
-                )}
-              </section>
-            </div>
-          </section>
+                  </section>
+
+                  <section className="collection-image">
+                    <h4>collection image</h4>
+                    <div className="form-wrapper">
+                      <label style={{ color: "#a6a6a6" }}>Upload collection image [Select <span style={{ textDecoration: "underline" }}>ONE</span> image only]</label>
+                      <div style={{ marginTop: "1rem" }}>
+                        <Cloudinary
+                          handleOpenWidget={handleOpenWidget}
+                          images={collection.image}
+                          handleDeleteImage={handleDeleteImage}
+                        />
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <section className="collection-products-list">
+                  <h4>Products in Collection</h4>
+                  {finalProductData.length === 0 ? <p style={{ fontFamily: "Avenir-Medium", color: "crimson", paddingBlock: "2rem", paddingLeft: "2rem", marginTop: "0px" }}>There are no products to display</p> : (
+                    (
+                      <div className="products-list-table">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Title</th>
+                              <th>Status</th>
+                              <th>Deletion</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {finalProductData.map((eachProduct, index) => (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td><Link to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
+                                <td>{eachProduct.published ? "Active" : "Inactive"}</td>
+                                <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )
+                  )}
+                </section>
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
-    </ProtectedLayout>
-  );
+      </ProtectedLayout>
+    );
+  }
+
+
 };
 
 export default EditCollection;

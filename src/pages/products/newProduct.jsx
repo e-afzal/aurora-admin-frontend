@@ -11,6 +11,7 @@ import ProtectedLayout from '../../components/ProtectedLayout';
 const NewProduct = () => {
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [product, setProduct] = useState({
     product_title: "",
     product_price: 0,
@@ -25,6 +26,14 @@ const NewProduct = () => {
     product_images: { values: [] },
     collectionId: null
   });
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/categories`)
+      .then(res => {
+        setCategories(res.data);
+      })
+      .catch(err => console.log(err.message));
+  }, []);
 
   useEffect(() => {
     // Get collections to populate collection 'select' options
@@ -266,7 +275,7 @@ const NewProduct = () => {
                 />
                 <h3>Add product</h3>
               </div>
-              <button onClick={handleSave}>save</button>
+              <button onClick={handleSave}>save product</button>
             </div>
 
             <div className="area-grid">
@@ -315,21 +324,18 @@ const NewProduct = () => {
                 <section className="product-organization">
                   <h4>Product Organization</h4>
                   <div className="form-wrapper">
+
                     <div className="form-control">
                       <label htmlFor="product-type">Type</label>
                       <select name="product_types">
                         <option selected disabled>Select Product Type</option>
-                        <option onClick={handleSelect} value="anklets">Anklets</option>
-                        <option onClick={handleSelect} value="bangles">Bangles</option>
-                        <option onClick={handleSelect} value="bracelets">Bracelets</option>
-                        <option onClick={handleSelect} value="chains">Chains</option>
-                        <option onClick={handleSelect} value="cuffs">Cuffs</option>
-                        <option onClick={handleSelect} value="earrings">Earrings</option>
-                        <option onClick={handleSelect} value="necklaces">Necklaces</option>
-                        <option onClick={handleSelect} value="rings">Rings</option>
+                        {categories.map((category, index) => (
+                          <option key={index} onClick={handleSelect} value={category.name}>{category.name}</option>
+                        ))}
                       </select>
                     </div>
-                    <div className="form-control">
+
+                    {/* <div className="form-control">
                       <label htmlFor="product-type">Tag</label>
                       <select name="product_tags">
                         <option selected disabled>Select Product Tag</option>
@@ -342,7 +348,8 @@ const NewProduct = () => {
                         <option onClick={handleSelect} value="necklace">Necklace</option>
                         <option onClick={handleSelect} value="ring">Ring</option>
                       </select>
-                    </div>
+                    </div> */}
+
                     <div className="form-control">
                       <label htmlFor="product-collection">Collection</label>
                       <select name="collectionId">
@@ -354,6 +361,7 @@ const NewProduct = () => {
                     </div>
                   </div>
                 </section>
+
                 <section className="product-inventory">
                   <h4>Inventory</h4>
                   <div className="form-wrapper">

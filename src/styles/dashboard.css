@@ -22,6 +22,7 @@ body .dashboard-grid .dashboard-sidebar .dashboard-links a.home-link {
 body .dashboard-grid .dashboard-sidebar .dashboard-links a.home-link img {
   padding: 10px;
   border-radius: 5px;
+  /* background-color: #242424; */
 }
 body .dashboard-grid .dashboard-sidebar .dashboard-links hr {
   color: #707070;

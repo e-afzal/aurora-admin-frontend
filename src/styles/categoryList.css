@@ -28,7 +28,7 @@ body .dashboard-grid .dashboard-sidebar .dashboard-links hr {
 }
 body .dashboard-grid .dashboard-sidebar .dashboard-links a.product-link img {
   padding: 10px;
-  background-color: #242424;
+  /* background-color: #242424; */
   border-radius: 5px;
 }
 body .dashboard-grid .dashboard-sidebar .dashboard-links a.product-link,
