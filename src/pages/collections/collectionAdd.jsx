@@ -51,7 +51,7 @@ const AddCollection = () => {
     setCollection(prevState => {
       return {
         ...prevState,
-        mainCollectionId: e.target.value
+        mainCollectionId: Number(e.target.value)
       };
     });
   };
@@ -100,7 +100,8 @@ const AddCollection = () => {
       name: collection.name,
       description: collection.description,
       status: collection.status,
-      image: collection.image
+      image: collection.image,
+      mainCollectionId: collection.mainCollectionId
     })
       .then((res) => {
         navigate("/dashboard/collections");
