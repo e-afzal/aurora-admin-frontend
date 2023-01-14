@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../styles/terms.css';
+import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
 // COMPONENT
 import Sidebar from '../components/Sidebar';
@@ -40,13 +41,15 @@ const Conditions = () => {
           <section className="dashboard-main">
             <div className="area-header">
               <div className="arrow-title">
-                <img
-                  src="/images/icons/chevron-right-outline-white.svg"
-                  alt="Return Back Icon"
-                />
+                <Link to={"/dashboard"} style={{ backgroundColor: "transparent", padding: "0px", alignItems: "flex-start" }}>
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                  />
+                </Link>
                 <h3>Terms & Conditions</h3>
               </div>
-              <button onClick={handleSave}>save</button>
+              <button onClick={handleSave}>save conditions</button>
             </div>
 
             <div className="area-grid">

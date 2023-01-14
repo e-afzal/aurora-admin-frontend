@@ -3,28 +3,43 @@ import '../../styles/customers.css';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-// COMPONENT
+// COMPONENTS
 import Sidebar from '../../components/Sidebar';
 import ProtectedLayout from '../../components/ProtectedLayout';
 
 const Customers = () => {
   const [users, setUsers] = useState(null);
+  const [finalUsers, setFinalUsers] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/users`)
       .then(res => {
-        setUsers(res.data);
+        setUsers(res.data.data);
       })
       .catch(error => console.log(console.log(error)));
   }, []);
 
-  if (users === null) {
+  useEffect(() => {
+    if (!searchTerm) {
+      setFinalUsers(users);
+    }
+  }, [searchTerm, users]);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+    const regex = new RegExp(`${searchTerm}`, "i");
+    const newData = users.filter(user => regex.test(user.last_name));
+    setFinalUsers(newData);
+  };
+
+  if (finalUsers === null) {
     return (
       <h1>Loading..</h1>
     );
   }
 
-  if (users !== null) {
+  if (finalUsers !== null) {
     return (
       <ProtectedLayout>
         <div className="dashboard-grid">
@@ -43,9 +58,10 @@ const Customers = () => {
                   type="search"
                   name="search-product"
                   id="search-product"
-                  placeholder="search by name or location"
+                  placeholder="search by last name"
                   minLength="4"
                   maxLength="30"
+                  onChange={handleSearch}
                 />
                 <div className="filter-sort">
                   <button className="filter">filter</button>
@@ -56,7 +72,6 @@ const Customers = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th><input type="checkbox" name="" id="all-cb" /></th>
                       <th>Customer Name</th>
                       <th>Location</th>
                       <th>Orders</th>
@@ -64,9 +79,8 @@ const Customers = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {users.data.map((eachUser, index) => (
+                    {finalUsers.map((eachUser, index) => (
                       <tr key={index}>
-                        <td><input type="checkbox" /></td>
                         <td><Link to={`/dashboard/customers/${eachUser.id}`}>{`${eachUser.first_name} ${eachUser.last_name}`}</Link></td>
                         <td>{`${eachUser.addresses.city}, ${eachUser.addresses.country}` || "N/A"}</td>
                         <td>{eachUser.orders.length} {eachUser.orders.length === 1 ? "order" : "orders"}</td>
