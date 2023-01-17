@@ -67,7 +67,7 @@ const Categories = () => {
         <div className="dashboard-grid">
 
           {/* SIDEBAR */}
-          <Sidebar />
+          <Sidebar activePage={"products"} />
 
           {/* DELETE MODAL */}
           <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteCategory} />
