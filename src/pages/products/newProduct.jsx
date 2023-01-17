@@ -389,16 +389,16 @@ const NewProduct = () => {
                   <div className="gold-colors">
                     <h5>Gold colors</h5>
                     <div className="form-control">
-                      <input type="checkbox" name="gold_color" id="yellow" value={"yellow gold"} onClick={handleGold} />
-                      <label style={{ marginLeft: "3px" }} htmlFor="yellow">Yellow Gold</label>
+                      <input type="checkbox" name="gold_color" id="yellow_gold" value={"yellow gold"} onClick={handleGold} />
+                      <label style={{ marginLeft: "3px" }} htmlFor="yellow_gold">Yellow Gold</label>
                     </div>
                     <div className="form-control">
                       <input type="checkbox" name="gold_color" id="rose" value={"rose gold"} onClick={handleGold} />
                       <label style={{ marginLeft: "3px" }} htmlFor="rose">Rose Gold</label>
                     </div>
                     <div className="form-control">
-                      <input type="checkbox" name="gold_color" id="white" value={"white gold"} onClick={handleGold} />
-                      <label style={{ marginLeft: "3px" }} htmlFor="white">White Gold</label>
+                      <input type="checkbox" name="gold_color" id="white_gold" value={"white gold"} onClick={handleGold} />
+                      <label style={{ marginLeft: "3px" }} htmlFor="white_gold">White Gold</label>
                     </div>
                   </div>
 
