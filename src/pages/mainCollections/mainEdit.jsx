@@ -1,7 +1,6 @@
 import '../../styles/collectionMainEdit.css';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 // COMPONENTS
@@ -33,10 +32,6 @@ const MainEdit = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setMainCollection(prevState => {
           return {
@@ -73,8 +68,6 @@ const MainEdit = () => {
     axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/main-collections/${id}`, mainCollection)
       .then((res) => {
         if (res.data.status === "success") {
-          //? Should show toast with 'res.data.message' of 'success'
-          //? Then navigate to below in 2.5 seconds
           navigate("/dashboard/main-collections");
         }
       })
@@ -100,36 +93,30 @@ const MainEdit = () => {
     });
   };
 
-  if (originalData === null) {
-    return (
-      <h1>Loading..</h1>
-    );
-  }
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-  if (originalData !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
+        {/* SIDEBAR */}
+        <Sidebar />
 
-          {/* SIDEBAR */}
-          <Sidebar />
-
-          <div className="dashboard-container">
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <div className="arrow-title">
-                  <Link to={"/dashboard/main-collections"} style={{ backgroundColor: "transparent", padding: "0px", alignItems: "flex-start" }}>
-                    <img
-                      src="/images/icons/chevron-right-outline-white.svg"
-                      alt="Return Back Icon"
-                    />
-                  </Link>
-                  <h3>Edit Collection</h3>
-                </div>
-                <button onClick={handleSave}>save</button>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <div className="arrow-title">
+                <Link to={"/dashboard/main-collections"} style={{ backgroundColor: "transparent", padding: "0px", alignItems: "flex-start" }}>
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                  />
+                </Link>
+                <h3>Edit Collection</h3>
               </div>
+              <button onClick={handleSave}>save</button>
+            </div>
 
+            {originalData !== null && (
               <div className="area-grid">
                 <section className="category-content">
                   <h4>collection content</h4>
@@ -184,14 +171,13 @@ const MainEdit = () => {
                   </div>
                 </section>
               </div>
-            </section>
-          </div>
+            )}
+
+          </section>
         </div>
-      </ProtectedLayout>
-    );
-  }
-
-
+      </div>
+    </ProtectedLayout>
+  );
 };
 
 export default MainEdit;

@@ -55,49 +55,45 @@ const MainList = () => {
     setFinalMainListData(newData);
   };
 
-  if (finalMainListData === null) {
-    return (
-      <h1>Loading..</h1>
-    );
-  }
 
-  if (finalMainListData !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-          {/* SIDEBAR */}
-          <Sidebar />
+        {/* SIDEBAR */}
+        <Sidebar />
 
-          {/* DELETE MODAL */}
-          <ModalDelete
-            showModal={showModal}
-            setShowModal={setShowModal}
-            deleteItem={deleteMainCollection}
-          />
+        {/* DELETE MODAL */}
+        <ModalDelete
+          showModal={showModal}
+          setShowModal={setShowModal}
+          deleteItem={deleteMainCollection}
+        />
 
-          <div className="dashboard-container">
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <h3>Main Collections</h3>
-                <Link to={"/dashboard/main-collections/new"}>add collection</Link>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <h3>Main Collections</h3>
+              <Link to={"/dashboard/main-collections/new"}>add collection</Link>
+            </div>
+            <div className="area-filters">
+              <input
+                type="search"
+                name="search-product"
+                id="search-product"
+                placeholder="search by collection name"
+                minLength={"4"}
+                maxLength={"30"}
+                onChange={handleSearch}
+              />
+              <div className="filter-sort">
+                <button className="filter">filter</button>
+                <button className="sort">sort</button>
               </div>
-              <div className="area-filters">
-                <input
-                  type="search"
-                  name="search-product"
-                  id="search-product"
-                  placeholder="search by collection name"
-                  minLength={"4"}
-                  maxLength={"30"}
-                  onChange={handleSearch}
-                />
-                <div className="filter-sort">
-                  <button className="filter">filter</button>
-                  <button className="sort">sort</button>
-                </div>
-              </div>
+            </div>
+
+            {finalMainListData !== null && (
               <div className="area-table">
                 <table>
                   <thead>
@@ -126,14 +122,13 @@ const MainList = () => {
                   </tbody>
                 </table>
               </div>
-            </section>
-          </div>
+            )}
+
+          </section>
         </div>
-      </ProtectedLayout>
-    );
-  }
-
-
+      </div>
+    </ProtectedLayout>
+  );
 };
 
 export default MainList;

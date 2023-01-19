@@ -2,8 +2,6 @@ import '../../styles/product.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 // COMPONENTS
 import Sidebar from '../../components/Sidebar';
@@ -107,10 +105,6 @@ const UpdateProduct = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setProduct(prevState => {
           return {
@@ -266,56 +260,35 @@ const UpdateProduct = () => {
       .then((res) => {
         if (res.data.status === "success") {
           navigate("/dashboard/products");
-          //? Show success message from backend
-          // toast.success(res.data.message, {
-          //   position: toast.POSITION.BOTTOM_CENTER,
-          //   autoClose: 3500,
-          //   hideProgressBar: true,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "dark",
-          // });
-          // setTimeout(() => {
-          // }, 4000);
         }
       })
       .catch((error) => console.log(error.message));
   };
 
-  if (collections === null) {
-    return (
-      <h1>Loading..</h1>
-    );
-  }
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-  if (collections !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-          {/* SIDEBAR */}
-          <Sidebar activePage={"products"} />
-
-
-          <div className="dashboard-container">
-            <ToastContainer />
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <div className="arrow-title">
-                  <img
-                    src="/images/icons/chevron-right-outline-white.svg"
-                    alt="Return Back Icon"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigate("/dashboard/products")}
-                  />
-                  <h3>{originalData.product_title}</h3>
-                </div>
-                <button onClick={handleSave}>update product</button>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <div className="arrow-title">
+                <img
+                  src="/images/icons/chevron-right-outline-white.svg"
+                  alt="Return Back Icon"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate("/dashboard/products")}
+                />
+                <h3>Edit product</h3>
               </div>
+              <button onClick={handleSave}>update product</button>
+            </div>
 
+            {originalData !== null && collections !== null && (
               <div className="area-grid">
                 <section className="product-content">
                   <h4>product content</h4>
@@ -502,14 +475,13 @@ const UpdateProduct = () => {
                   </div>
                 </section>
               </div>
-            </section >
-          </div >
-        </div>
-      </ProtectedLayout>
-    );
-  }
+            )}
 
-
+          </section >
+        </div >
+      </div>
+    </ProtectedLayout>
+  );
 };
 
 export default UpdateProduct;

@@ -26,10 +26,6 @@ const MainAdd = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setMainCollection(prevState => {
           return {
@@ -53,8 +49,6 @@ const MainAdd = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/main-collections`, mainCollection)
       .then((res) => {
         if (res.data.status === "success") {
-          //? Should show toast with 'res.data.message' of 'success'
-          //? Then navigate to below in 2.5 seconds
           navigate("/dashboard/main-collections");
         }
       })

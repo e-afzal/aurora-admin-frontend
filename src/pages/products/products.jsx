@@ -87,30 +87,35 @@ const Products = () => {
                 <button className="sort">sort</button>
               </div>
             </div>
-            <div className="area-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Status</th>
-                    <th>Type</th>
-                    <th>Inventory</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {finalProductData && finalProductData.map((eachProduct, index) => (
-                    <tr key={index}>
-                      <td ><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
-                      <td>{eachProduct.published ? "active" : "inactive"}</td>
-                      <td>{eachProduct.product_types}</td>
-                      <td>5 units in stock</td>
-                      <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+            {finalProductData !== null && (
+              <div className="area-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Status</th>
+                      <th>Type</th>
+                      <th>Inventory</th>
+                      <th>Remove</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+
+                    {finalProductData.map((eachProduct, index) => (
+                      <tr key={index}>
+                        <td ><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={`/dashboard/products/${eachProduct.product_id}/edit`}>{eachProduct.product_title}</Link></td>
+                        <td>{eachProduct.published ? "active" : "inactive"}</td>
+                        <td>{eachProduct.product_types}</td>
+                        <td>5 units in stock</td>
+                        <td><img onClick={() => openModal(eachProduct.product_id)} style={{ height: "20px", marginTop: "3px", cursor: "pointer" }} src="/images/icons/trash-icon-red.svg" alt="Trash Icons" /></td>
+                      </tr>
+                    ))}
+
+                  </tbody>
+                </table>
+              </div>
+            )}
+
           </section>
         </div>
       </div>

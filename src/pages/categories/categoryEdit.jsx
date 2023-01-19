@@ -1,7 +1,6 @@
 import '../../styles/categoryEdit.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 // COMPONENTS
@@ -42,7 +41,6 @@ const CategoryEdit = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
       if (error) {
         console.log(error);
       }
@@ -84,56 +82,37 @@ const CategoryEdit = () => {
     axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/categories/${id}`, category)
       .then((res) => {
         if (res.data.status === "success") {
-          //? Should show toast with 'res.data.message' of 'success'
           navigate("/dashboard/categories");
-          // toast.success(res.data.message, {
-          //   position: toast.POSITION.BOTTOM_CENTER,
-          //   autoClose: 3500,
-          //   hideProgressBar: true,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "dark",
-          // });
-          //? Then navigate to below in 2.5 seconds
         }
       })
       .catch((error) => console.log(error.message));
   };
 
-  if (originalData === null) {
-    return (
-      <h1>LOADING..</h1>
-    );
-  }
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
+        {/* SIDEBAR */}
+        <Sidebar />
 
-  if (originalData !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
-          {/* SIDEBAR */}
-          <Sidebar />
+        <div className="dashboard-container">
 
-          <div className="dashboard-container">
-            {/* TOAST */}
-            <ToastContainer />
-
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <div className="arrow-title">
-                  <Link to={"/dashboard/categories"} style={{ backgroundColor: "transparent", padding: "0px", alignItems: "flex-start" }}>
-                    <img
-                      src="/images/icons/chevron-right-outline-white.svg"
-                      alt="Return Back Icon"
-                    />
-                  </Link>
-                  <h3>{originalData.name}</h3>
-                </div>
-                <button onClick={handleSave}>save</button>
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <div className="arrow-title">
+                <Link to={"/dashboard/categories"} style={{ backgroundColor: "transparent", padding: "0px", alignItems: "flex-start" }}>
+                  <img
+                    src="/images/icons/chevron-right-outline-white.svg"
+                    alt="Return Back Icon"
+                  />
+                </Link>
+                <h3>Edit category</h3>
               </div>
+              <button onClick={handleSave}>save</button>
+            </div>
 
+
+            {originalData !== null && (
               <div className="area-grid">
                 <section className="category-content">
                   <h4>category content</h4>
@@ -160,12 +139,13 @@ const CategoryEdit = () => {
                   </div>
                 </section>
               </div>
-            </section>
-          </div>
+            )}
+
+          </section>
         </div>
-      </ProtectedLayout>
-    );
-  }
+      </div>
+    </ProtectedLayout>
+  );
 };
 
 export default CategoryEdit;

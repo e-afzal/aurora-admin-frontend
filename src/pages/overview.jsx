@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import '../styles/dashboard.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // COMPONENT
 import Sidebar from '../components/Sidebar';
-import { useAuth0 } from '@auth0/auth0-react';
 import ProtectedLayout from '../components/ProtectedLayout';
 
 const Overview = () => {
-  const navigate = useNavigate();
   const [hour, setHour] = useState(new Date().getHours());
   const [icon, setIcon] = useState(String.fromCodePoint(127774));
   const [greeting, setGreeting] = useState("Day Haifa!");

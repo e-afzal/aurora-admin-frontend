@@ -33,41 +33,36 @@ const Customers = () => {
     setFinalUsers(newData);
   };
 
-  if (finalUsers === null) {
-    return (
-      <h1>Loading..</h1>
-    );
-  }
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-  if (finalUsers !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
+        {/* SIDEBAR */}
+        <Sidebar activePage={"customers"} />
 
-          {/* SIDEBAR */}
-          <Sidebar activePage={"customers"} />
-
-          <div className="dashboard-container">
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <h3>Customers</h3>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <h3>Customers</h3>
+            </div>
+            <div className="area-filters">
+              <input
+                type="search"
+                name="search-product"
+                id="search-product"
+                placeholder="search by last name"
+                minLength="4"
+                maxLength="30"
+                onChange={handleSearch}
+              />
+              <div className="filter-sort">
+                <button className="filter">filter</button>
+                <button className="sort">sort</button>
               </div>
-              <div className="area-filters">
-                <input
-                  type="search"
-                  name="search-product"
-                  id="search-product"
-                  placeholder="search by last name"
-                  minLength="4"
-                  maxLength="30"
-                  onChange={handleSearch}
-                />
-                <div className="filter-sort">
-                  <button className="filter">filter</button>
-                  <button className="sort">sort</button>
-                </div>
-              </div>
+            </div>
+
+            {finalUsers !== null && (
               <div className="area-table">
                 <table>
                   <thead>
@@ -90,15 +85,13 @@ const Customers = () => {
                   </tbody>
                 </table>
               </div>
-            </section>
-          </div>
+            )}
+
+          </section>
         </div>
-      </ProtectedLayout>
-    );
-  }
-
-
-
+      </div>
+    </ProtectedLayout>
+  );
 };
 
 export default Customers;

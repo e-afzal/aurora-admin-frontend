@@ -1,5 +1,5 @@
 import '../../styles/categoryNew.css';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -33,10 +33,6 @@ const CategoryAdd = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setCategory(prevState => {
           return {
@@ -73,8 +69,6 @@ const CategoryAdd = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/categories`, category)
       .then((res) => {
         if (res.data.status === "success") {
-          //? Should show toast with 'res.data.message' of 'success'
-          //? Then navigate to below in 2.5 seconds
           navigate("/dashboard/categories");
         }
       })

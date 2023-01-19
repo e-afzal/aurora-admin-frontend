@@ -103,10 +103,6 @@ const EditCollection = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setCollection(prevState => {
           return {

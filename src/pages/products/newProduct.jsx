@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/product.css';
 
@@ -22,6 +22,7 @@ const NewProduct = () => {
     product_size: { values: [] },
     gold_color: { values: [] },
     enamel_colors: { values: [] },
+    // stone_color:{values:[]},
     hook_options: { values: [] },
     product_images: { values: [] },
     collectionId: null
@@ -68,6 +69,12 @@ const NewProduct = () => {
     { name: "enamel_color", id: "lilac", value: "lilac", title: "Lilac" },
   ];
 
+  // Stone color options for Nova Ring
+  const stoneColors = [
+    { name: "stone_color", id: "pink_stone", value: "pink", title: "Pink" },
+    { name: "stone_color", id: "blue_stone", value: "blue", title: "Blue" },
+  ];
+
   const sizes = [
     { name: "sizes", value: "bangle", title: "Bangle", sizes: ["15cm", "15.5cm", "16cm", "16.5cm", "17cm", "18cm"] },
     { name: "sizes", value: "bracelet", title: "Bracelet", sizes: ["13.4cm", "14.6cm", "15.9cm", "17.2cm", "18.4cm"] },
@@ -89,10 +96,6 @@ const NewProduct = () => {
       // folder: "/testing",
       user_filename: true
     }, (error, result) => {
-      // Show toast if there is error
-      // if (error) { 
-      //   console.log(error);
-      // }
       if (!error && result && result.event === "success") {
         setProduct(prevState => {
           return {
@@ -212,6 +215,27 @@ const NewProduct = () => {
     }
   };
 
+  const handleStone = (e) => {
+    if (e.target.checked) {
+      setProduct(prevState => {
+        return {
+          ...prevState,
+          stone_color: { values: [...prevState.stone_color.values, e.target.value] }
+        };
+      });
+    }
+    // If item 'unchecked', remove item from array
+    if (!e.target.checked) {
+      const filtered = product.stone_color.values.filter(color => color !== e.target.value);
+      setProduct(prevState => {
+        return {
+          ...prevState,
+          stone_color: { values: filtered }
+        };
+      });
+    }
+  };
+
   const handleSize = (e) => {
     const selectedCategory = sizes.find(size => size.value === e.target.value);
     setProduct(prevState => {
@@ -247,8 +271,6 @@ const NewProduct = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products`, product)
       .then((res) => {
         if (res.data.status === "success") {
-          //? Should show toast with 'res.data.message' of 'success'
-          //? Then navigate to below in 2.5 seconds
           navigate("/dashboard/products");
         }
       })
@@ -402,16 +424,6 @@ const NewProduct = () => {
                     </div>
                   </div>
 
-                  <div className="enamels">
-                    <h5>Enamel Options</h5>
-                    {enamelColors.map((enamelColor, index) => (
-                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
-                        <input type="checkbox" name={enamelColor.name} id={enamelColor.id} value={enamelColor.value} onClick={handleEnamel} />
-                        <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
-                      </div>
-                    ))}
-                  </div>
-
                   <div className="sizes">
                     <h5>Sizes</h5>
                     <div className="form-control">
@@ -422,6 +434,26 @@ const NewProduct = () => {
                         ))}
                       </select>
                     </div>
+                  </div>
+
+                  <div className="enamels">
+                    <h5>Enamel Options</h5>
+                    {enamelColors.map((enamelColor, index) => (
+                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
+                        <input type="checkbox" name={enamelColor.name} id={enamelColor.id} value={enamelColor.value} onClick={handleEnamel} />
+                        <label htmlFor={enamelColor.id}>{enamelColor.title}</label>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="stones">
+                    <h5>Stone color options</h5>
+                    {stoneColors.map((stoneColor, index) => (
+                      <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
+                        <input type="checkbox" name={stoneColor.name} id={stoneColor.id} value={stoneColor.value} onClick={handleStone} />
+                        <label htmlFor={stoneColor.id}>{stoneColor.title}</label>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="hooks">

@@ -55,45 +55,39 @@ const Categories = () => {
     setFinalCategoryData(newData);
   };
 
-  if (finalCategoryData === null) {
-    return (
-      <h1>Loading</h1>
-    );
-  }
+  return (
+    <ProtectedLayout>
+      <div className="dashboard-grid">
 
-  if (finalCategoryData !== null) {
-    return (
-      <ProtectedLayout>
-        <div className="dashboard-grid">
+        {/* SIDEBAR */}
+        <Sidebar activePage={"products"} />
 
-          {/* SIDEBAR */}
-          <Sidebar activePage={"products"} />
+        {/* DELETE MODAL */}
+        <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteCategory} />
 
-          {/* DELETE MODAL */}
-          <ModalDelete showModal={showModal} setShowModal={setShowModal} deleteItem={deleteCategory} />
-
-          <div className="dashboard-container">
-            <div className="divider"></div>
-            <section className="dashboard-main">
-              <div className="area-header">
-                <h3>Categories</h3>
-                <Link to={"/dashboard/categories/new"}>add category</Link>
+        <div className="dashboard-container">
+          <div className="divider"></div>
+          <section className="dashboard-main">
+            <div className="area-header">
+              <h3>Categories</h3>
+              <Link to={"/dashboard/categories/new"}>add category</Link>
+            </div>
+            <div className="area-filters">
+              <input
+                type="search"
+                name="search-product"
+                id="search-product"
+                placeholder="search by category name"
+                minLength={"4"}
+                maxLength={"30"}
+                onChange={handleSearch}
+              />
+              <div className="filter-sort">
+                <button className="filter">filter</button>
+                <button className="sort">sort</button>
               </div>
-              <div className="area-filters">
-                <input
-                  type="search"
-                  name="search-product"
-                  id="search-product"
-                  placeholder="search by category name"
-                  minLength={"4"}
-                  maxLength={"30"}
-                  onChange={handleSearch}
-                />
-                <div className="filter-sort">
-                  <button className="filter">filter</button>
-                  <button className="sort">sort</button>
-                </div>
-              </div>
+            </div>
+            {finalCategoryData !== null && (
               <div className="area-table">
                 <table>
                   <thead>
@@ -118,12 +112,14 @@ const Categories = () => {
                   </tbody>
                 </table>
               </div>
-            </section>
-          </div>
+            )}
+
+          </section>
         </div>
-      </ProtectedLayout>
-    );
-  }
+      </div>
+    </ProtectedLayout>
+  );
+
 };
 
 export default Categories;
