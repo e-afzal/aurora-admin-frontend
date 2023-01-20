@@ -22,7 +22,7 @@ const NewProduct = () => {
     product_size: { values: [] },
     gold_color: { values: [] },
     enamel_colors: { values: [] },
-    // stone_color:{values:[]},
+    stone_color: { values: [] },
     hook_options: { values: [] },
     product_images: { values: [] },
     collectionId: null
@@ -53,26 +53,27 @@ const NewProduct = () => {
 
   // Boilerplate
   const enamelColors = [
-    { name: "enamel_color", id: "red", value: "red", title: "Red" },
-    { name: "enamel_color", id: "orange", value: "orange", title: "Orange" },
-    { name: "enamel_color", id: "yellow", value: "yellow", title: "Yellow" },
-    { name: "enamel_color", id: "mustard_yellow", value: "mustard yellow", title: "Mustard yellow" },
-    { name: "enamel_color", id: "turquoise", value: "turquoise", title: "Turquoise" },
-    { name: "enamel_color", id: "blue", value: "blue", title: "Blue" },
-    { name: "enamel_color", id: "purple", value: "purple", title: "Purple" },
-    { name: "enamel_color", id: "bright_pink", value: "bright pink", title: "Bright pink" },
-    { name: "enamel_color", id: "baby_pink", value: "baby pink", title: "Baby pink" },
-    { name: "enamel_color", id: "brown", value: "brown", title: "Brown" },
-    { name: "enamel_color", id: "grey", value: "grey", title: "Grey" },
-    { name: "enamel_color", id: "white", value: "white", title: "White" },
-    { name: "enamel_color", id: "black", value: "black", title: "Black" },
+    { name: "enamel_color", id: "baby_pink", value: "baby pink", title: "Baby Pink" },
+    { name: "enamel_color", id: "berry", value: "berry", title: "Berry" },
+    { name: "enamel_color", id: "biscoff_brown", value: "biscoff brown", title: "Biscoff Brown" },
+    { name: "enamel_color", id: "blanco", value: "blanco", title: "Blanco" },
+    { name: "enamel_color", id: "candy_apple", value: "candy apple", title: "Candy Apple" },
+    { name: "enamel_color", id: "ebony", value: "ebony", title: "Ebony" },
+    { name: "enamel_color", id: "jade", value: "jade", title: "Jade" },
+    { name: "enamel_color", id: "lemon", value: "lemon", title: "Lemon" },
     { name: "enamel_color", id: "lilac", value: "lilac", title: "Lilac" },
+    { name: "enamel_color", id: "maldivian_blue", value: "maldivian blue", title: "Maldivian Blue" },
+    { name: "enamel_color", id: "mustard_yellow", value: "mustard yellow", title: "Mustard Yellow" },
+    { name: "enamel_color", id: "rose_pink", value: "rose pink", title: "Rose Pink" },
+    { name: "enamel_color", id: "sapphire_blue", value: "sapphire blue", title: "Sapphire Blue" },
+    { name: "enamel_color", id: "steel_gray", value: "steel gray", title: "Steel Gray" },
+    { name: "enamel_color", id: "tangerine", value: "tangerine", title: "Tangerine" },
   ];
 
   // Stone color options for Nova Ring
   const stoneColors = [
-    { name: "stone_color", id: "pink_stone", value: "pink", title: "Pink" },
-    { name: "stone_color", id: "blue_stone", value: "blue", title: "Blue" },
+    { name: "stone_color", id: "blue", value: "blue", title: "Blue" },
+    { name: "stone_color", id: "pink", value: "pink", title: "Pink" },
   ];
 
   const sizes = [
@@ -446,8 +447,8 @@ const NewProduct = () => {
                     ))}
                   </div>
 
-                  <div className="stones">
-                    <h5>Stone color options</h5>
+                  <div className="stones" style={{ marginBottom: "2.5rem" }}>
+                    <h5 style={{ fontFamily: "Brandon_Grotesque-Medium, sans-serif", color: "#a6a6a6" }}>Stone color options [nova rings]</h5>
                     {stoneColors.map((stoneColor, index) => (
                       <div className="form-control" style={{ marginBottom: "1rem" }} key={index}>
                         <input type="checkbox" name={stoneColor.name} id={stoneColor.id} value={stoneColor.value} onClick={handleStone} />
