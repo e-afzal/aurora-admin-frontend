@@ -435,7 +435,14 @@ const UpdateProduct = () => {
                     <div className="form-wrapper">
                       <div className="form-control">
                         <label htmlFor="product-inventory">Total units for sale</label>
-                        <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" onChange={handleInventory} />
+                        <input
+                          type="number"
+                          name="product-inventory"
+                          id="product-inventory"
+                          placeholder="Enter a number"
+                          onChange={handleInventory}
+                          value={product.inventory}
+                        />
                       </div>
                     </div>
                   </section>
