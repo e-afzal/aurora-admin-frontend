@@ -28,6 +28,7 @@ const UpdateProduct = () => {
     stone_color: { values: [] },
     hook_options: { values: [] },
     product_images: { values: [] },
+    inventory: 0,
     collectionId: null
   });
 
@@ -253,6 +254,15 @@ const UpdateProduct = () => {
     }
   };
 
+  const handleInventory = (e) => {
+    setProduct(prevState => {
+      return {
+        ...prevState,
+        inventory: Number(e.target.value)
+      };
+    });
+  };
+
   const handleSize = (e) => {
     const selectedCategory = sizes.find(size => size.value === e.target.value);
     setProduct(prevState => {
@@ -425,7 +435,7 @@ const UpdateProduct = () => {
                     <div className="form-wrapper">
                       <div className="form-control">
                         <label htmlFor="product-inventory">Total units for sale</label>
-                        <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
+                        <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" onChange={handleInventory} />
                       </div>
                     </div>
                   </section>

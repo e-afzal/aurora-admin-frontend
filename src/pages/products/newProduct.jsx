@@ -25,6 +25,7 @@ const NewProduct = () => {
     stone_color: { values: [] },
     hook_options: { values: [] },
     product_images: { values: [] },
+    inventory: 0,
     collectionId: null
   });
 
@@ -268,6 +269,15 @@ const NewProduct = () => {
     }
   };
 
+  const handleInventory = (e) => {
+    setProduct(prevState => {
+      return {
+        ...prevState,
+        inventory: Number(e.target.value)
+      };
+    });
+  };
+
   const handleSave = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products`, product)
       .then((res) => {
@@ -390,7 +400,7 @@ const NewProduct = () => {
                   <div className="form-wrapper">
                     <div className="form-control">
                       <label htmlFor="product-inventory">Total units for sale</label>
-                      <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" />
+                      <input type="number" name="product-inventory" id="product-inventory" placeholder="Enter a number" onChange={handleInventory} />
                     </div>
                   </div>
                 </section></div>
