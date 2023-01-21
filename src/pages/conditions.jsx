@@ -1,6 +1,6 @@
 import '../styles/terms.css';
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 // COMPONENT
@@ -8,6 +8,7 @@ import Sidebar from '../components/Sidebar';
 import ProtectedLayout from '../components/ProtectedLayout';
 
 const Conditions = () => {
+  const navigate = useNavigate();
   const [conditions, setConditions] = useState(null);
 
   useEffect(() => {
@@ -25,7 +26,9 @@ const Conditions = () => {
 
   const handleSave = () => {
     axios.put(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/conditions`, conditions)
-      .then(res => console.log(res.data))
+      .then(res => {
+        navigate("/dashboard");
+      })
       .catch(error => console.log(error.message));
   };
 
