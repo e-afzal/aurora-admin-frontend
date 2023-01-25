@@ -11,8 +11,10 @@ import ProtectedLayout from '../../components/ProtectedLayout';
 const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [collections, setCollections] = useState(null);
+  const [collections, setCollections] = useState([]);
   const [defaultCollection, setDefaultCollection] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [defaultCategory, setDefaultCategory] = useState("");
   const [originalData, setOriginalData] = useState(null);
   const [product, setProduct] = useState({
     product_id: 0,
@@ -29,11 +31,12 @@ const UpdateProduct = () => {
     hook_options: { values: [] },
     product_images: { values: [] },
     inventory: 0,
-    collectionId: null
+    collectionId: null,
+    categoryId: null
   });
 
+  // Get Product Data by ID
   useEffect(() => {
-    // Get Product Data by ID
     axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/products/${id}`)
       .then(res => {
         setProduct(res.data);
@@ -42,27 +45,25 @@ const UpdateProduct = () => {
       .catch(error => console.log(error));
   }, [id]);
 
+  // Get collections to populate collection 'select' options
   useEffect(() => {
-    // Get collections to populate collection 'select' options
     axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/collections/select/${id}`)
       .then(res => {
         setCollections(res.data.collections);
         setDefaultCollection(res.data.collectionId);
       })
       .catch(error => console.log(error.message));
+
+    // Get categories to populate collection 'select' options
+    axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/categories/select/${id}`)
+      .then(res => {
+        setCategories(res.data.categories);
+        setDefaultCategory(res.data.categoryId);
+      })
+      .catch(error => console.log(error.message));
   }, [id]);
 
   // Boilerplate
-  const types = [
-    { value: "anklets", title: "Anklets" },
-    { value: "bangles", title: "Bangles" },
-    { value: "bracelets", title: "Bracelets" },
-    { value: "cuffs", title: "Cuffs" },
-    { value: "earrings", title: "Earrings" },
-    { value: "necklaces", title: "Necklaces" },
-    { value: "rings", title: "Rings" },
-  ];
-
   const enamelColors = [
     { name: "enamel_color", id: "baby_pink", value: "baby pink", title: "Baby Pink" },
     { name: "enamel_color", id: "berry", value: "berry", title: "Berry" },
@@ -189,6 +190,17 @@ const UpdateProduct = () => {
         };
       });
     }
+  };
+
+  const handleType = (e) => {
+    const selectedCategory = categories.find(category => category.name === e.target.value);
+    setProduct(prevState => {
+      return {
+        ...prevState,
+        categoryId: selectedCategory.id,
+        product_types: selectedCategory.name
+      };
+    });
   };
 
   const handleGold = (e) => {
@@ -387,16 +399,35 @@ const UpdateProduct = () => {
                   <section className="product-organization">
                     <h4>Product Organization</h4>
                     <div className="form-wrapper">
+
                       <div className="form-control">
                         <label htmlFor="product-type">Type</label>
-                        <select name="product_types" defaultValue={originalData.product_types}>
+                        <select
+                          name="product_types"
+                        // defaultValue={originalData.product_types}
+                        >
                           <option disabled>Select Product Type</option>
-                          {types.map((type, index) => (
+                          {categories.map((category, index) => (
                             <option
                               key={index}
-                              onClick={handleSelect}
-                              value={type.value}
-                              selected={type.value === originalData.product_types}>{type.title}</option>
+                              value={category.name}
+                              selected={Number(category.id) === Number(defaultCategory)}
+                              onClick={handleType}
+                            >{category.name}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="form-control">
+                        <label htmlFor="product-collection">Collection</label>
+                        <select name="collectionId">
+                          <option disabled>Select Collection</option>
+                          {collections.map((collection, index) => (
+                            <option
+                              key={index}
+                              selected={Number(collection.id) === Number(defaultCollection)}
+                              value={collection.id}
+                              onClick={handleSelect}>{collection.name}</option>
                           ))}
                         </select>
                       </div>
@@ -415,21 +446,10 @@ const UpdateProduct = () => {
   
                           </select>
                         </div> */}
-                      <div className="form-control">
-                        <label htmlFor="product-collection">Collection</label>
-                        <select name="collectionId">
-                          <option disabled>Select Collection</option>
-                          {collections.map((collection, index) => (
-                            <option
-                              key={index}
-                              selected={Number(collection.id) === Number(defaultCollection)}
-                              value={collection.id}
-                              onClick={handleSelect}>{collection.name}</option>
-                          ))}
-                        </select>
-                      </div>
+
                     </div>
                   </section>
+
                   <section className="product-inventory">
                     <h4>Inventory</h4>
                     <div className="form-wrapper">
