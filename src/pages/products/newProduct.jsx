@@ -92,8 +92,8 @@ const NewProduct = () => {
   // Cloudinary upload widget
   const handleOpenWidget = () => {
     let myWidget = window.cloudinary.createUploadWidget({
-      cloudName: "ddeima5fc",
-      uploadPreset: "xf4uvx7a",
+      cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+      uploadPreset: process.env.REACT_APP_CLOUDINARY_PRESET,
       sources: ["local", "url", "google_drive", "dropbox", "instagram"],
       // folder: "/testing",
       user_filename: true

@@ -8,7 +8,7 @@ import Sidebar from '../../components/Sidebar';
 import ProtectedLayout from '../../components/ProtectedLayout';
 
 const Orders = () => {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/admin/orders`)
@@ -17,6 +17,8 @@ const Orders = () => {
       })
       .catch(error => console.log(error));
   }, []);
+
+  console.log(orders);
 
   // CURRENCY LOCALIZATION Function
   function localize(amount) {
@@ -75,7 +77,7 @@ const Orders = () => {
                       <tr key={index}>
                         <td><Link style={{ color: "#578edb", borderColor: "#578edb" }} to={"/dashboard/orders/" + eachOrder.orderNumber}>#{eachOrder.orderNumber}</Link></td>
                         <td>{new Date(eachOrder.createdAt).toLocaleDateString("en-AE", { month: "short", day: "numeric", year: "2-digit" })}</td>
-                        <td>{eachOrder.name}</td>
+                        <td>{eachOrder.name || "Username"}</td>
                         <td>{localize(eachOrder.totalAmt)}</td>
                         <td>{eachOrder.payment_status}</td>
                         <td>{eachOrder.fulfillmentStatus}</td>

@@ -8,8 +8,8 @@ const UploadWidget = () => {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget({
       // Cloudname found in cloudinary dashboard
-      cloudName: "ddeima5fc",
-      uploadPreset: "xf4uvx7a"
+      cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+      uploadPreset: process.env.REACT_APP_CLOUDINARY_PRESET
     }, (error, result) => {
       if (error) {
         console.log(result);
